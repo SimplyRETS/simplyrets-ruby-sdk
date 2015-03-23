@@ -1,0 +1,112 @@
+#+AUTHOR: SimplyRETS, Christopher Reichert, Cody Reichert
+#+TITLE: SimplyRETS Ruby SDK (Beta)
+
+The official Ruby SDK for the [[https://simplrets.com][SimplyRETS]] Listings API.
+
+SimplyRETS provides a modern and simple interface for building robust
+applications and websites with Real Estate data.
+
+** Installation
+
+   Clone the repo or install the =simplyrets= gem:
+
+   #+BEGIN_SRC bash
+     $ git clone git@github.com/SimplyRETS/simplyrets-ruby-sdk
+   #+END_SRC
+   or
+   #+BEGIN_SRC bash
+     $ gem install simplyrets
+   #+END_SRC
+
+
+** Quick Start
+
+   Here's a quick example to set up the client and make a request:
+
+   #+BEGIN_SRC ruby
+     %w(rubygems simplyrets).each {|lib| require lib}
+     %w(rubygems simplyrets).each {|models| require models}
+
+     require "simplyrets"
+     require "properties_api"
+     require "listing"
+
+     SimplyRets.configure do |config|
+       config.username = 'simplyrets'
+       config.password = 'simplyrets'
+     end
+
+     # all properties
+     ps = Properties_api.properties()
+     p ps
+
+     # Single Listing
+     l = Properties_api.property()
+     p l.mls
+   #+END_SRC
+
+
+** Setup the client
+
+   To start using the SDK, require =simplyrets= and configure a client
+   by setting your API key and API secret (we have demo credentials
+   available you can use for free!). Here's a short example:
+
+   #+BEGIN_SRC ruby
+     require 'simplyrets'
+
+     SimplyRets.configure do |config|
+       config.username = 'simplyrets'
+       config.password = 'simplyrets'
+     end
+   #+END_SRC
+
+
+** Examples: Making Requests
+
+   Once you have the API Client instantiated you can use the
+   Properties API to make requests for multiple or single listings.
+
+   Request all listings with no filters:
+   #+BEGIN_SRC ruby
+     require 'properties_api'
+
+     ps = Properties_api.properties()
+     p ps
+   #+END_SRC
+
+   Request a single listing by id:
+   #+BEGIN_SRC ruby
+     l = Properties_api.property(mls_id=19548526)
+     p l.mls
+   #+END_SRC
+
+
+   Multiple query parameters can be sent to the API to request more
+   refined results:
+   #+BEGIN_SRC ruby
+     # listings with minprice of $700,000 and minbeds of 4
+     ps = Properties_api.properties({:minprice => 700000, :minbeds => 4})
+     p ps
+   #+END_SRC
+
+   Sending back points to get listings in a geographical area:
+   #+BEGIN_SRC ruby
+     # listings within geographics points
+     points = ["29.723837146389066,-95.69778442382812" ,"29.938275329718987,-95.778442382812" ,"29.938275329718987,-95.32974243164061","29.723837146389066,-95.32974243164061"]
+     ps = Properties_api.properties({:points => points})
+     p ps
+   #+END_SRC
+
+
+** Additional Info
+
+   View the complete interactive API on [[https://docs.simplyrets.com/api/index.html][the docs page]]. Here you can
+   find all the available query parameters and the complete response
+   body. You can even see the URL made for that request.
+
+
+** Support
+
+   For support regarding the API or bugs in the SDK, can contact us at
+   support (at) simplyrets (dot) com - or leave an issue on the [[https://github.com/simplyrets/simplyrets-ruby-sdk][Github page]]!

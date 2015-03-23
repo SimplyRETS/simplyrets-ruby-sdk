@@ -39,18 +39,15 @@ applications and websites with Real Estate data.
      # all properties
      ps = Properties_api.properties()
      p ps
-
-     # Single Listing
-     l = Properties_api.property()
-     p l.mls
    #+END_SRC
 
 
 ** Setup the client
 
-   To start using the SDK, require =simplyrets= and configure a client
-   by setting your API key and API secret (we have demo credentials
-   available you can use for free!). Here's a short example:
+   To start using the SDK, require =simplyrets= in your gemspec and
+   configure a client by setting your API key and API secret (we have
+   demo credentials available you can use for free!). Here's a short
+   example:
 
    #+BEGIN_SRC ruby
      require 'simplyrets'
@@ -64,7 +61,7 @@ applications and websites with Real Estate data.
 
 ** Examples: Making Requests
 
-   Once you have the API Client instantiated you can use the
+   Once you have instantiated the API Client, you can use the
    Properties API to make requests for multiple or single listings.
 
    Request all listings with no filters:

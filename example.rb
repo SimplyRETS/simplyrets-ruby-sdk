@@ -15,12 +15,12 @@ SimplyRets.configure do |config|
 end
 
 # Properties
-listings = Properties_api.properties({:minbeds => 2,:brokers => [ "SR1234" ]})
+listings = Properties_api.properties({:minbeds => 2,:brokers => [ "SR1234", "ACME12" ]})
 listings.each do |l|
   p l.property['bedrooms']
   p l.office['brokerid']
 end
 
 # Single Listing
-prop = Properties_api.property(47638976)
+prop = Properties_api.property(47639002)
 p "#{prop.geo['lat']}, #{prop.geo['lng']}"

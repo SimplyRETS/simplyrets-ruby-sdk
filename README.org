@@ -1,9 +1,9 @@
-#+AUTHOR: SimplyRETS, Christopher Reichert, Cody Reichert
-#+TITLE: SimplyRETS Ruby SDK (Beta)
+#+AUTHOR: SimplyRets, Christopher Reichert, Cody Reichert
+#+TITLE: SimplyRets Ruby SDK (Beta)
 
-The official Ruby SDK for the [[https://simplrets.com][SimplyRETS]] Listings API.
+The official Ruby SDK for the [[https://simplrets.com][SimplyRets]] Listings API.
 
-SimplyRETS provides a modern and simple interface for building robust
+SimplyRets provides a modern and simple interface for building robust
 applications and websites with Real Estate data.
 
 ** Installation
@@ -11,7 +11,7 @@ applications and websites with Real Estate data.
    Clone the repo or install the =simplyrets= gem:
 
    #+BEGIN_SRC bash
-     $ git clone git@github.com/SimplyRETS/simplyrets-ruby-sdk
+     $ git clone git@github.com/SimplyRets/simplyrets-ruby-sdk
    #+END_SRC
    or
    #+BEGIN_SRC bash

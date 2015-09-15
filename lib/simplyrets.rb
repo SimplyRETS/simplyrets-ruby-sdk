@@ -1,57 +1,34 @@
+# SimplyRets common files
+require 'simplyrets/simplyrets'
+require 'simplyrets/simplyrets/configuration'
+require 'simplyrets/simplyrets/api_error'
+require 'simplyrets/simplyrets/request'
+require 'simplyrets/simplyrets/response'
+require 'simplyrets/simplyrets/version'
 
-require 'monkey'
-require 'simplyrets/configuration'
-require 'simplyrets/request'
-require 'simplyrets/response'
-require 'simplyrets/version'
-require 'logger'
+# Models
+require 'simplyrets/models/base_object'
+require 'simplyrets/models/street_address'
+require 'simplyrets/models/property'
+require 'simplyrets/models/listing'
+require 'simplyrets/models/open_house'
+require 'simplyrets/models/office'
+require 'simplyrets/models/agent'
+require 'simplyrets/models/sales'
+require 'simplyrets/models/school'
+require 'simplyrets/models/parking'
+require 'simplyrets/models/contact_information'
+require 'simplyrets/models/tax'
+require 'simplyrets/models/geographic_data'
+require 'simplyrets/models/broker'
+require 'simplyrets/models/mls_information'
+require 'simplyrets/models/error'
 
-module SimplyRets
+# APIs
+require 'simplyrets/api/default_api'
 
-  class << self
-    attr_accessor :logger
-
-    # A SimplyRets configuration object. Must act like a hash and
-    # return sensible values for all SimplyRets configuration
-    # options. See SimplyRets::Configuration.
-    attr_accessor :configuration
-
-    attr_accessor :resources
-
-    # Call this method to modify defaults in your initializers.
-    #
-    # @example
-    #   SimplyRets.configure do |config|
-    #     config.username = 'simplyrets'
-    #     config.password = 'simplyrets'
-    #     config.format = 'json'         # optional, defaults to 'json'
-    #   end
-    #
-    def configure
-      self.configuration ||= Configuration.new
-      yield(configuration) if block_given?
-
-      # Configure logger.  Default to use Rails
-      self.logger ||= configuration.logger || (defined?(Rails) ? Rails.logger : Logger.new(STDOUT))
-
-      # remove :// from scheme
-      configuration.scheme.sub!(/:\/\//, '')
-
-      # remove http(s):// and anything after a slash
-      configuration.host.sub!(/https?:\/\//, '')
-      configuration.host = configuration.host.split('/').first
-
-      # Add leading and trailing slashes to base_path
-      configuration.base_path = "/#{configuration.base_path}".gsub(/\/+/, '/')
-      configuration.base_path = "" if configuration.base_path == "/"
-    end
-
-  end
-
-end
-
-class ServerError < StandardError
-end
-
-class ClientError < StandardError
+module SimplyRetsClient
+  # Initialize the default configuration
+  SimplyRets.configuration = SimplyRets::Configuration.new
+  SimplyRets.configure { |config| }
 end

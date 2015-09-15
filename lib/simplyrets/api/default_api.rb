@@ -14,7 +14,7 @@ module SimplyRetsClient
     # @option opts [Integer] :maxarea Filter listings by a maximum area size in Sq Ft.\n
     # @option opts [Integer] :minbaths Filter listings by a minimum number of bathrooms.\n
     # @option opts [Integer] :maxbaths Filter listings by a maximum number of bathrooms.\n
-    # @option opts [Integer] :mineds Filter listings by a minimum number of bedrooms.\n
+    # @option opts [Integer] :minbeds Filter listings by a minimum number of bedrooms.\n
     # @option opts [Integer] :maxbeds Filter listings by a maximum number of bedrooms.\n
     # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the `offset` parameter, or the Link in the HTTP\nHeader.\n
     # @option opts [Integer] :offset Used as a cursor for pagination. Increase the offset parameter\nby the limit to go to the next \&quot;page\&quot; of listings. Also take\na look at the Link HTTP Header for pre-built pagination.\n
@@ -63,7 +63,7 @@ module SimplyRetsClient
       query_params[:'maxarea'] = opts[:'maxarea'] if opts[:'maxarea']
       query_params[:'minbaths'] = opts[:'minbaths'] if opts[:'minbaths']
       query_params[:'maxbaths'] = opts[:'maxbaths'] if opts[:'maxbaths']
-      query_params[:'mineds'] = opts[:'mineds'] if opts[:'mineds']
+      query_params[:'minbeds'] = opts[:'minbeds'] if opts[:'minbeds']
       query_params[:'maxbeds'] = opts[:'maxbeds'] if opts[:'maxbeds']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
       query_params[:'offset'] = opts[:'offset'] if opts[:'offset']

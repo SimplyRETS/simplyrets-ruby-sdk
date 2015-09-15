@@ -20,7 +20,6 @@ listings.each do |l|
   p l.office.brokerid
 end
 
-p "Single Property"
 # Single Listing
 prop = SimplyRetsClient::Properties_api.property(63423516)
 p prop

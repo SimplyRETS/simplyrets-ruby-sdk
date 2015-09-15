@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://simplyrets.com"
   s.summary     = %q{SimplyRETS Ruby SDK}
   s.description = %q{This gem provides a SimplyRETS SDK for creating real estate software with RETS data}
-  s.license     = "BSD3"
+  s.license     = "MIT"
 
   s.add_runtime_dependency 'typhoeus', '~> 0.2', '>= 0.2.1'
   s.add_runtime_dependency 'json', '~> 1.4', '>= 1.4.6'

@@ -12,8 +12,10 @@ SimplyRetsClient::SimplyRets.configure do |config|
   config.password = 'simplyrets'
 end
 
+points = [ "29.723837146389066,-95.69778442382812", "29.938275329718987,-95.69778442382812", "29.938275329718987,-95.32974243164061", "29.723837146389066,-95.32974243164061" ]
+
 # Properties
-listings = SimplyRetsClient::Properties_api.properties({:minbeds => 2})
+listings = SimplyRetsClient::Properties_api.properties({:minbeds => 2, :points => points})
 listings.each do |l|
   p l.property
   p l.property.bedrooms

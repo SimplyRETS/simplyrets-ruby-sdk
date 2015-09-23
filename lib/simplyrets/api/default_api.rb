@@ -34,7 +34,7 @@ module SimplyRetsClient
         SimplyRets.logger.debug "Calling API: DefaultApi#properties ..."
       end
 
-      if opts[:'type'] && !['Residential', 'Rential', 'Multifamily', 'Condominium', 'Commercial', 'Land'].include?(opts[:'type'])
+      if opts[:'type'] && !['Residential', 'Rental', 'Multifamily', 'Condominium', 'Commercial', 'Land'].include?(opts[:'type'])
         fail 'invalid value for "type", must be one of Residential, Rential, Multifamily, Condominium, Commercial, Land'
       end
 

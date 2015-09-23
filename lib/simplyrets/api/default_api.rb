@@ -24,7 +24,7 @@ module SimplyRetsClient
     # @option opts [Array<String>] :neighborhoods Filter the listings returned by specific neighborhoods and\nsubdivisions. You can specify multiple.\n
     # @option opts [Array<String>] :points A list of latitude longitude coordinates which contain\nthe property. Our documentation generator does not yet\nsupport using a list of parameters.\n
     # @option opts [Array<String>] :counties Filter the listings returned by specific counties. You can\nspecify multiple.\n
-    # @option opts [String] :status Request listings by a specific status. This defaults to\nactive and you can only specify one status in a single\nquery.\n
+    # @option opts [Array<String>] :status Filter the listings returned by a specific status. You can\nspecify multiple.\n
     # @option opts [String] :type Request listings by a specific property type. This\ndefaults to Residential, and you can only specify one type\nin a single query.\n
     # @option opts [String] :sort Sort the response by a specific field. Values starting\nwith a minus (-) denote descending order, while the others\nare ascending.\n
     # @option opts [String] :include Include a limited set of extra fields which are not found\nin the default response body\n- &#39;rooms&#39; include parameter will include\n   any additional rooms as a list.\n- &#39;pool&#39; includes an additional pool description\n- &#39;association&#39; includes additional home owners association data\n
@@ -32,10 +32,6 @@ module SimplyRetsClient
     def self.properties(opts = {})
       if SimplyRets.configuration.debug
         SimplyRets.logger.debug "Calling API: DefaultApi#properties ..."
-      end
-
-      if opts[:'status'] && !['Active', 'Pending', 'Closed'].include?(opts[:'status'])
-        fail 'invalid value for "status", must be one of Active, Pending, Closed'
       end
 
       if opts[:'type'] && !['Residential', 'Rential', 'Multifamily', 'Condominium', 'Commercial', 'Land'].include?(opts[:'type'])

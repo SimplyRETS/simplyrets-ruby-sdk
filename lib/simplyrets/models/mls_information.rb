@@ -58,7 +58,7 @@ module SimplyRetsClient
     end
 
     def status=(status)
-      allowed_values = ["Active", "Pending", "Closed", "Expired", "Cancelled"]
+      allowed_values = ["Active", "ActiveUnderContract", "Pending", "Hold", "Withdrawn", "Closed", "Expired", "Cancelled", "Delete", "Incomplete", "ComingSoon"]
       if status && !allowed_values.include?(status)
         fail "invalid value for 'status', must be one of #{allowed_values}"
       end

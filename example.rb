@@ -23,6 +23,6 @@ listings.each do |l|
 end
 
 # Single Listing
-prop = SimplyRetsClient::Properties_api.property(63423516)
+prop = SimplyRetsClient::Properties_api.property(1005221)
 p prop
 p prop.geo.lat

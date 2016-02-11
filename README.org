@@ -1,10 +1,12 @@
 #+AUTHOR: SimplyRETS, Christopher Reichert, Cody Reichert
 #+TITLE: SimplyRETS Ruby SDK (Beta)
 
-The official Ruby SDK for the [[https://simplrets.com][SimplyRETS]] Listings API.
+The official Ruby SDK for the [[https://simplyrets.com][SimplyRETS]] Listings API.
 
 SimplyRETS provides a modern and simple interface for building robust
 applications and websites with Real Estate data.
+
+You can view the full API Documentation [[https://docs.simplyrets.com/api/index.html][here]].
 
 ** Installation
 

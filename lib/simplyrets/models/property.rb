@@ -1,99 +1,164 @@
 module SimplyRetsClient
-  #
+  # Rets MLS Listing Property
   class Property < BaseObject
-    attr_accessor :roof, :style, :area, :area_source, :baths_full, :baths_half, :stories, :fireplaces, :heating, :bedrooms, :interior_features, :lot_size, :exterior_features, :subdivision, :type, :year_built, :additional_rooms, :maintenance_expense, :garage_spaces, :pool_features, :lot_description, :occupant_type, :occupant_name, :foundation, :laundry_features, :construction_materials, :view, :water, :accessibility, :parking
-    # attribute mapping from ruby-style variable name to JSON key
+    # Property roof description
+    attr_accessor :roof
+
+    # Property style description or short string
+    attr_accessor :style
+
+    # Square footage of the building associated with a listing
+    attr_accessor :area
+
+    attr_accessor :area_source
+
+    # Number of full bathrooms
+    attr_accessor :baths_full
+
+    # Number of half bathrooms
+    attr_accessor :baths_half
+
+    # Number of stories or levels. Represented as a `double' to\naccount for half stories.
+    attr_accessor :stories
+
+    # Number of fireplaces
+    attr_accessor :fireplaces
+
+    # Heating description or short string
+    attr_accessor :heating
+
+    # Number of bedrooms
+    attr_accessor :bedrooms
+
+    # The properties interior features
+    attr_accessor :interior_features
+
+    # Square footage of the entire property lot
+    attr_accessor :lot_size
+
+    #
+    attr_accessor :exterior_features
+
+    # The subdivision or community name
+    attr_accessor :subdivision
+
+    # Abbreviated property type. RES is Residential, CND is CondoOrTownhome,\nRNT is Rental, MLF is Multi-Family, CRE is Commercial, LND is Land,\nFRM is Farm. See the 'propertySubType' field for more information.
+    attr_accessor :type
+
+    # The property's sub-type, i.e. SingleFamilyResidential,\nCondo, etc. Or a list of Sub Types for Mobile, such as\nExpando, Manufactured, Modular, etc.
+    attr_accessor :sub_type
+
+    # Year the property was built
+    attr_accessor :year_built
+
+    # Additional room information
+    attr_accessor :additional_rooms
+
+    # Yearly maintenance expense
+    attr_accessor :maintenance_expense
+
+    # Number of garage spaces
+    attr_accessor :garage_spaces
+
+    attr_accessor :pool_features
+
+    attr_accessor :lot_description
+
+    attr_accessor :occupant_type
+
+    attr_accessor :occupant_name
+
+    attr_accessor :foundation
+
+    attr_accessor :laundry_features
+
+    # The materials that were used in the construction of the property.
+    attr_accessor :construction
+
+    # The type(s) of flooring found within the property.
+    attr_accessor :flooring
+
+    # A description of the cooling or air conditioning features of the property.
+    attr_accessor :cooling
+
+    # View details and description
+    attr_accessor :view
+
+    # Water description and details
+    attr_accessor :water
+
+    attr_accessor :accessibility
+
+    attr_accessor :parking
+
+    # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
 
-        # Property roof description
         :'roof' => :'roof',
 
-        # Property style description or short string
         :'style' => :'style',
 
-        # Square footage of the building associated with a listing
         :'area' => :'area',
 
-        #
         :'area_source' => :'areaSource',
 
-        # Number of full bathrooms
         :'baths_full' => :'bathsFull',
 
-        # Number of half bathrooms
         :'baths_half' => :'bathsHalf',
 
-        # Number of stories or levels. Represented as a `double&#39; to\naccount for half stories.\n
         :'stories' => :'stories',
 
-        # Number of fireplaces
         :'fireplaces' => :'fireplaces',
 
-        # Heating description or short string
         :'heating' => :'heating',
 
-        # Number of bedrooms
         :'bedrooms' => :'bedrooms',
 
-        # The properties interior features
         :'interior_features' => :'interiorFeatures',
 
-        # Square footage of the entire property lot
         :'lot_size' => :'lotSize',
 
-        #
         :'exterior_features' => :'exteriorFeatures',
 
-        # The subdivision or community name
         :'subdivision' => :'subdivision',
 
-        # Property type (Residential, Multi-Family, Rental)
         :'type' => :'type',
 
-        # Year the property was built
+        :'sub_type' => :'subType',
+
         :'year_built' => :'yearBuilt',
 
-        # Additional room information
         :'additional_rooms' => :'additionalRooms',
 
-        # Yearly maintenance expense
         :'maintenance_expense' => :'maintenanceExpense',
 
-        # Number of garage spaces
         :'garage_spaces' => :'garageSpaces',
 
-        #
         :'pool_features' => :'poolFeatures',
 
-        #
         :'lot_description' => :'lotDescription',
 
-        #
         :'occupant_type' => :'occupantType',
 
-        #
         :'occupant_name' => :'occupantName',
 
-        #
         :'foundation' => :'foundation',
 
-        #
         :'laundry_features' => :'laundryFeatures',
 
-        #
-        :'construction_materials' => :'constructionMaterials',
+        :'construction' => :'construction',
 
-        # View details and description
+        :'flooring' => :'flooring',
+
+        :'cooling' => :'cooling',
+
         :'view' => :'view',
 
-        # Water description and details
         :'water' => :'water',
 
-        #
         :'accessibility' => :'accessibility',
 
-        #
         :'parking' => :'parking'
 
       }
@@ -117,6 +182,7 @@ module SimplyRetsClient
         :'exterior_features' => :'String',
         :'subdivision' => :'String',
         :'type' => :'String',
+        :'sub_type' => :'String',
         :'year_built' => :'Integer',
         :'additional_rooms' => :'String',
         :'maintenance_expense' => :'Float',
@@ -127,7 +193,9 @@ module SimplyRetsClient
         :'occupant_name' => :'String',
         :'foundation' => :'String',
         :'laundry_features' => :'String',
-        :'construction_materials' => :'String',
+        :'construction' => :'String',
+        :'flooring' => :'String',
+        :'cooling' => :'String',
         :'view' => :'String',
         :'water' => :'String',
         :'accessibility' => :'String',
@@ -203,6 +271,10 @@ module SimplyRetsClient
         self.type = attributes[:'type']
       end
 
+      if attributes[:'subType']
+        self.type = attributes[:'subType']
+      end
+
       if attributes[:'yearBuilt']
         self.year_built = attributes[:'yearBuilt']
       end
@@ -243,8 +315,16 @@ module SimplyRetsClient
         self.laundry_features = attributes[:'laundryFeatures']
       end
 
-      if attributes[:'constructionMaterials']
-        self.construction_materials = attributes[:'constructionMaterials']
+      if attributes[:'construction']
+        self.construction = attributes[:'construction']
+      end
+
+      if attributes[:'flooring']
+        self.flooring = attributes[:'flooring']
+      end
+
+      if attributes[:'cooling']
+        self.cooling = attributes[:'cooling']
       end
 
       if attributes[:'view']
@@ -265,8 +345,9 @@ module SimplyRetsClient
 
     end
 
+    # Custom attribute writer method checking allowed values (enum).
     def type=(type)
-      allowed_values = ["RES", "CND", "RNT"]
+      allowed_values = ["RES", "CND", "RNT", "MLF", "CRE", "LND", "FRM"]
       if type && !allowed_values.include?(type)
         fail "invalid value for 'type', must be one of #{allowed_values}"
       end

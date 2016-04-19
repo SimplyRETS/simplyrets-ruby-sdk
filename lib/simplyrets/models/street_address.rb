@@ -1,7 +1,7 @@
 module SimplyRetsClient
   #
   class StreetAddress < BaseObject
-    attr_accessor :country, :postal_code, :street_name, :city, :street_number, :full, :cross_street
+    attr_accessor :country, :postal_code, :street_name, :city, :street_number, :full, :cross_street, :state
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -25,8 +25,10 @@ module SimplyRetsClient
         :'full' => :'full',
 
         # Known cross street
-        :'cross_street' => :'crossStreet'
+        :'cross_street' => :'crossStreet',
 
+        # state or province
+        :'state' => :'state'
       }
     end
 
@@ -39,8 +41,8 @@ module SimplyRetsClient
         :'city' => :'String',
         :'street_number' => :'Integer',
         :'full' => :'String',
-        :'cross_street' => :'String'
-
+        :'cross_street' => :'String',
+        :'state' => :'String'
       }
     end
 
@@ -77,6 +79,10 @@ module SimplyRetsClient
 
       if attributes[:'crossStreet']
         self.cross_street = attributes[:'crossStreet']
+      end
+
+      if attributes[:'state']
+        self.state = attributes[:'state']
       end
 
     end

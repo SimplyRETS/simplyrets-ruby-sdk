@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simplyrets (1.0.5)
+    simplyrets (1.0.6)
       json (~> 1.4, >= 1.4.6)
       typhoeus (~> 0.2, >= 0.2.1)
 

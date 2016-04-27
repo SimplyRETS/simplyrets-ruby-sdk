@@ -12,9 +12,9 @@ require 'simplyrets/api/default_api'
 p "SimplyRets Ruby SDK"
 
 SimplyRetsClient.configure do |config|
-  config.username = 'fmls'
-  config.password = 'fmls'
-  config.debugging = true
+  config.username = 'simplyrets'
+  config.password = 'simplyrets'
+  #config.debugging = true
 end
 
 points = [ "29.723837146389066,-95.69778442382812", "29.938275329718987,-95.69778442382812", "29.938275329718987,-95.32974243164061", "29.723837146389066,-95.32974243164061" ]

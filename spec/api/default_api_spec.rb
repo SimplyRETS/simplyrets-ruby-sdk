@@ -107,11 +107,16 @@ describe 'DefaultApi' do
   # @return [Array<Listing>]
   describe 'properties_get test' do
     it "should work" do
-      # assertion here
-      # should be_a()
-      # should be_nil
-      # should ==
-      # should_not ==
+      SimplyRetsClient.configure do |config|
+        config.username = 'simplyrets'
+        config.password = 'simplyrets'
+      end
+
+      api = SimplyRetsClient::DefaultApi.new
+      listings = api.properties_get({:minbeds => 2, :limit => 50, :type => []})
+
+      # Ensure the
+      listings.should_not == []
     end
   end
 

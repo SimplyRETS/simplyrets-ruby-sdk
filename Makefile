@@ -30,3 +30,12 @@ ruby-client.zip:
 test:
 	bundle exec ./example.rb
 	bundle exec rspec
+
+release:
+	gem build simplyrets.gemspec
+	#gem push simplyrets-2.0.0.gem
+
+clean:
+	rm -f ruby-client.zip
+	rm -f ruby-client.meta
+	rm -rf ruby-client

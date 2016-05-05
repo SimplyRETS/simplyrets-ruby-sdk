@@ -1,7 +1,7 @@
 =begin
 SimplyRETS API
 
-The SimplyRETS API is an exciting step towards making it easier for\ndevelopers and real estate agents to build something awesome with\nreal estate data!\n\nThe documentation below makes live requests to our API using the\ntrial data. To get set up with the API using live MLS data, you\nmust have RETS credentials from your MLS, which you can then use to\ncreate an app with SimplyRETS. For more information on that\nprocess, please see our [FAQ](https://simplyrets.com/faq), [Getting\nStarted](https://simplyrets.com/blog/getting-set-up.html) page, or\n[contact us](https://simplyrets.com/\\#home-contact).\n\nBelow you'll find the API endpoints, query parameters, response bodies,\nand other information about using the SimplyRETS API. You can run\nqueries by clicking the 'Try it Out' button at the bottom of each\nsection.\n\n### Authentication\nThe SimplyRETS API uses Basic Authentication. When you create an\napp, you'll get a set of API credentials to access your\nlistings. If you're trying out the test data, you can use\n`simplyrets:simplyrets` for connecting to the API.\n\n### Media Types\nThe SimplyRETS API uses the 'Accept' header to allow clients to\ncontrol media types (content versions). We maintain backwards\ncompatibility with API clients by allowing them to specify a\ncontent version. We highly recommend setting and explicity media\ntype when your application reaches production. Both the structure\nand content of our API response bodies is subject to change so we\ncan add new features while respecting the stability of applications\nwhich have already been developed.\n\nTo always use the latest SimplyRETS content version, simply use\n`application/json` in your application `Accept` header.\n\nIf you want to pin your clients media type to a specific version,\nyou can use the vendor-specific SimplyRETS media type, e.g.\n`application/vnd.simplyrets-v0.1+json\"`\n\nTo view all valid content-types for making an `OPTIONS`, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n\nThe default media types used in our API responses may change in the\nfuture. If you're building an application and care about the\nstability of the API, be sure to request a specific media type in the\nAccept header as shown in the examples below.\n\nThe wordpress plugin automatically sets the `Accept` header for the\ncompatible SimplyRETS media types.\n\n### Pagination\nThere a few pieces of useful information about each request stored\nin the HTTP Headers:\n\n- `X-Total-Count` shows you the total amount of listings that match\n  your current query.\n- `Link` contains pre-built pagination links for accessing the next\n'page' of listings that match your query. Read more about that\n[here](https://simplyrets.com/blog/api-pagination.html).\n
+The SimplyRETS API is an exciting step towards making it easier for\ndevelopers and real estate agents to build something awesome with\nreal estate data!\n\nThe documentation below makes live requests to our API using the\ntrial data. To get set up with the API using live MLS data, you\nmust have RETS credentials from your MLS, which you can then use to\ncreate an app with SimplyRETS. For more information on that\nprocess, please see our [FAQ](https://simplyrets.com/faq), [Getting\nStarted](https://simplyrets.com/blog/getting-set-up.html) page, or\n[contact us](https://simplyrets.com/\\#home-contact).\n\nBelow you'll find the API endpoints, query parameters, response bodies,\nand other information about using the SimplyRETS API. You can run\nqueries by clicking the 'Try it Out' button at the bottom of each\nsection.\n\n### Authentication\nThe SimplyRETS API uses Basic Authentication. When you create an\napp, you'll get a set of API credentials to access your\nlistings. If you're trying out the test data, you can use\n`simplyrets:simplyrets` for connecting to the API.\n\n### Media Types\nThe SimplyRETS API uses the `Accept` header to allow clients to\ncontrol media types (content versions). We maintain backwards\ncompatibility with API clients by allowing them to specify a\ncontent version. We highly recommend setting and explicity media\ntype when your application reaches production. Both the structure\nand content of our API response bodies is subject to change so we\ncan add new features while respecting the stability of applications\nwhich have already been developed.\n\nTo always use the latest SimplyRETS content version, simply use\n`application/json` in your application `Accept` header.\n\nIf you want to pin your clients media type to a specific version,\nyou can use the vendor-specific SimplyRETS media type, e.g.\n`application/vnd.simplyrets-v0.1+json\"`\n\nTo view all valid content-types for making an `OPTIONS`, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n\nThe default media types used in our API responses may change in the\nfuture. If you're building an application and care about the\nstability of the API, be sure to request a specific media type in the\nAccept header as shown in the examples below.\n\nThe wordpress plugin automatically sets the `Accept` header for the\ncompatible SimplyRETS media types.\n\n### Pagination\nThere a few pieces of useful information about each request stored\nin the HTTP Headers:\n\n- `X-Total-Count` shows you the total amount of listings that match\n  your current query.\n- `Link` contains pre-built pagination links for accessing the next\n'page' of listings that match your query. Read more about that\n[here](https://simplyrets.com/blog/api-pagination.html).\n
 
 OpenAPI spec version: 1.0.0
 
@@ -55,6 +55,9 @@ module SimplyRetsClient
 
     attr_accessor :lot_description
 
+    # Lot size in acres\n\n**Added on 2016/05/04 - Not available for all RETS vendors**\n
+    attr_accessor :lot_size_acres
+
     # The property's sub-type, i.e. SingleFamilyResidential,\nCondo, etc. Or a list of Sub Types for Mobile, such as\nExpando, Manufactured, Modular, etc.\n
     attr_accessor :sub_type
 
@@ -75,7 +78,7 @@ module SimplyRetsClient
     # Additional room information
     attr_accessor :additional_rooms
 
-    #
+    # Exterior Features for the listing\n
     attr_accessor :exterior_features
 
     # Water description and details
@@ -83,6 +86,9 @@ module SimplyRetsClient
 
     # View details and description
     attr_accessor :view
+
+    # The total area of the lot.  See `lotSizeUnits` for the units\nof measurement (Square Feet, Square Meters, Acres, etc.).\n\n**Added on 2016/05/04 - Not available for all RETS vendors**\n
+    attr_accessor :lot_size_area
 
     # The subdivision or community name
     attr_accessor :subdivision
@@ -95,7 +101,7 @@ module SimplyRetsClient
     # Unit of measurement for the lotSizeArea field.  e.g. Square\nFeet, Square Meters, Acres, etc.\n\nIf this field is `null` the units is the default unit\nof measure specified by your RETS provider.\n\n**Added on 2016/05/04 - Not available for all RETS vendors**\n
     attr_accessor :lot_size_area_units
 
-    # Abbreviated property type. RES is Residential, CND is CondoOrTownhome,\nRNT is Rental, MLF is Multi-Family, CRE is Commercial, LND is Land,\nFRM is Farm. See the 'propertySubType' field for more information.\n
+    # Abbreviated property type. RES is Residential, CND is CondoOrTownhome,\nRNT is Rental, MLF is Multi-Family, CRE is Commercial, LND is Land,\nFRM is Farm. See the `propertySubType` field for more information.\n
     attr_accessor :type
 
     # Number of garage spaces
@@ -142,6 +148,8 @@ module SimplyRetsClient
 
         :'lot_description' => :'lotDescription',
 
+        :'lot_size_acres' => :'lotSizeAcres',
+
         :'sub_type' => :'subType',
 
         :'bedrooms' => :'bedrooms',
@@ -161,6 +169,8 @@ module SimplyRetsClient
         :'water' => :'water',
 
         :'view' => :'view',
+
+        :'lot_size_area' => :'lotSizeArea',
 
         :'subdivision' => :'subdivision',
 
@@ -201,6 +211,7 @@ module SimplyRetsClient
         :'laundry_features' => :'String',
         :'occupant_name' => :'String',
         :'lot_description' => :'String',
+        :'lot_size_acres' => :'Float',
         :'sub_type' => :'String',
         :'bedrooms' => :'Integer',
         :'interior_features' => :'String',
@@ -211,6 +222,7 @@ module SimplyRetsClient
         :'exterior_features' => :'String',
         :'water' => :'String',
         :'view' => :'String',
+        :'lot_size_area' => :'Float',
         :'subdivision' => :'String',
         :'construction' => :'String',
         :'parking' => :'School',
@@ -303,6 +315,12 @@ module SimplyRetsClient
         self.lot_description = attributes[:'lotDescription']
       end
 
+      if attributes[:'lotSizeAcres']
+        self.lot_size_acres = attributes[:'lotSizeAcres']
+      else
+        self.lot_size_acres = 10.0
+      end
+
       if attributes[:'subType']
         self.sub_type = attributes[:'subType']
       end
@@ -351,6 +369,12 @@ module SimplyRetsClient
 
       if attributes[:'view']
         self.view = attributes[:'view']
+      end
+
+      if attributes[:'lotSizeArea']
+        self.lot_size_area = attributes[:'lotSizeArea']
+      else
+        self.lot_size_area = 5000.0
       end
 
       if attributes[:'subdivision']
@@ -427,6 +451,7 @@ module SimplyRetsClient
           laundry_features == o.laundry_features &&
           occupant_name == o.occupant_name &&
           lot_description == o.lot_description &&
+          lot_size_acres == o.lot_size_acres &&
           sub_type == o.sub_type &&
           bedrooms == o.bedrooms &&
           interior_features == o.interior_features &&
@@ -437,6 +462,7 @@ module SimplyRetsClient
           exterior_features == o.exterior_features &&
           water == o.water &&
           view == o.view &&
+          lot_size_area == o.lot_size_area &&
           subdivision == o.subdivision &&
           construction == o.construction &&
           parking == o.parking &&
@@ -455,7 +481,7 @@ module SimplyRetsClient
 
     # Calculate hash code according to all attributes.
     def hash
-      [roof, cooling, style, area, baths_full, baths_half, stories, fireplaces, flooring, heating, foundation, pool_features, laundry_features, occupant_name, lot_description, sub_type, bedrooms, interior_features, lot_size, area_source, maintenance_expense, additional_rooms, exterior_features, water, view, subdivision, construction, parking, lot_size_area_units, type, garage_spaces, accessibility, occupant_type, year_built].hash
+      [roof, cooling, style, area, baths_full, baths_half, stories, fireplaces, flooring, heating, foundation, pool_features, laundry_features, occupant_name, lot_description, lot_size_acres, sub_type, bedrooms, interior_features, lot_size, area_source, maintenance_expense, additional_rooms, exterior_features, water, view, lot_size_area, subdivision, construction, parking, lot_size_area_units, type, garage_spaces, accessibility, occupant_type, year_built].hash
     end
 
     # build the object from hash

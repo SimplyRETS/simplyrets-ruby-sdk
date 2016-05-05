@@ -26,13 +26,13 @@ api = SimplyRetsClient::DefaultApi.new
 listings = api.properties_get({:minbeds => 2, :limit => 50, :type => ["Land", "Commercial"]})
 listings.each do |l|
   p l.property.type
-  #p l.property
-  #p l.property.bedrooms
-  #p l.office.brokerid
+  p l.property
+  p l.property.bedrooms
+  p l.office.brokerid
 end
 
 # Single Listing
 
-#prop = api.properties_mls_id_get(1005221)
-#p prop
-#p prop.geo.lat
+prop = api.properties_mls_id_get(1005221)
+p prop
+p prop.geo.lat

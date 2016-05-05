@@ -9,7 +9,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     ZenTest (4.11.0)
-    addressable (2.3.8)
+    addressable (2.4.0)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
     autotest-fsevent (0.2.10)

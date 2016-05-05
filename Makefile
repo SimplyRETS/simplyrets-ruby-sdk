@@ -29,8 +29,10 @@ ruby-client.zip:
 		jq --raw-output .link | \
 		xargs curl  --output ruby-client.zip
 
-test:
+example:
 	bundle exec ./example.rb
+
+test:
 	bundle exec rspec
 
 release:

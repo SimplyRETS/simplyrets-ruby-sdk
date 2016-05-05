@@ -24,18 +24,18 @@ module SimplyRetsClient
     # This is the main endpoint for accessing openhouses.\n
     # @param [Hash] opts the optional parameters
     # @option opts [String] :type Request listings by a specific property type. This\ndefaults to Residential, and you can only specify one type\nin a single query.\n
-    # @option opts [String] :listing_id Request openhouses for a specific &#x60;listingId&#x60;.\n
-    # @option opts [Array<String>] :cities Filter the openhouses returned by a list of valid cities. A\nlist of valid cities can be found by making an OPTIONS\nrequest to the &#x60;/openhouses&#x60; endpoint.\n
+    # @option opts [String] :listing_id Request openhouses for a specific `listingId`.\n
+    # @option opts [Array<String>] :cities Filter the openhouses returned by a list of valid cities. A\nlist of valid cities can be found by making an OPTIONS\nrequest to the `/openhouses` endpoint.\n
     # @option opts [Array<String>] :brokers Filter the listings returned by brokerage with a Broker ID.\nYou can specific multiple broker parameters. Note, the Broker\nID is provided by your MLS.\n
     # @option opts [String] :agent Filter the listings returned by an agent ID.  Note, the\nAgent ID is provided by your MLS.\n
     # @option opts [Integer] :minprice Filter listings by a minimum price.\n
     # @option opts [DateTime] :startdate Scheduled date and time of the open house showing
     # @option opts [Integer] :offset Used as a cursor for pagination. Increase the offset parameter\nby the limit to go to the next \&quot;page\&quot; of listings. Also take\na look at the Link HTTP Header for pre-built pagination.\n
-    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the &#x60;offset&#x60; parameter, or the Link in the HTTP\nHeader.\n
+    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the `offset` parameter, or the Link in the HTTP\nHeader.\n
     # @option opts [String] :sort Sort the response by a specific field. Values starting\nwith a minus (-) denote descending order, while the others\nare ascending.\n
     # @return [Array<OpenHouse>]
     def openhouses_get(opts = {})
-      data, _status_code, _headers = openhouses_get_with_http_info(opts)
+      data, status_code, headers = openhouses_get_with_http_info(opts)
       return data
     end
 
@@ -43,14 +43,14 @@ module SimplyRetsClient
     # This is the main endpoint for accessing openhouses.\n
     # @param [Hash] opts the optional parameters
     # @option opts [String] :type Request listings by a specific property type. This\ndefaults to Residential, and you can only specify one type\nin a single query.\n
-    # @option opts [String] :listing_id Request openhouses for a specific &#x60;listingId&#x60;.\n
-    # @option opts [Array<String>] :cities Filter the openhouses returned by a list of valid cities. A\nlist of valid cities can be found by making an OPTIONS\nrequest to the &#x60;/openhouses&#x60; endpoint.\n
+    # @option opts [String] :listing_id Request openhouses for a specific `listingId`.\n
+    # @option opts [Array<String>] :cities Filter the openhouses returned by a list of valid cities. A\nlist of valid cities can be found by making an OPTIONS\nrequest to the `/openhouses` endpoint.\n
     # @option opts [Array<String>] :brokers Filter the listings returned by brokerage with a Broker ID.\nYou can specific multiple broker parameters. Note, the Broker\nID is provided by your MLS.\n
     # @option opts [String] :agent Filter the listings returned by an agent ID.  Note, the\nAgent ID is provided by your MLS.\n
     # @option opts [Integer] :minprice Filter listings by a minimum price.\n
     # @option opts [DateTime] :startdate Scheduled date and time of the open house showing
     # @option opts [Integer] :offset Used as a cursor for pagination. Increase the offset parameter\nby the limit to go to the next \&quot;page\&quot; of listings. Also take\na look at the Link HTTP Header for pre-built pagination.\n
-    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the &#x60;offset&#x60; parameter, or the Link in the HTTP\nHeader.\n
+    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the `offset` parameter, or the Link in the HTTP\nHeader.\n
     # @option opts [String] :sort Sort the response by a specific field. Values starting\nwith a minus (-) denote descending order, while the others\nare ascending.\n
     # @return [Array<(Array<OpenHouse>, Fixnum, Hash)>] Array<OpenHouse> data, response status code and response headers
     def openhouses_get_with_http_info(opts = {})
@@ -86,19 +86,20 @@ module SimplyRetsClient
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
-      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+      _header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json']
-      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+      _header_content_type = ['application/json']
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-            auth_names = ['basicAuth']
+
+      auth_names = ['basicAuth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -118,7 +119,7 @@ module SimplyRetsClient
     # @param [Hash] opts the optional parameters
     # @return [OpenHouse]
     def openhouses_open_house_key_get(open_house_key, opts = {})
-      data, _status_code, _headers = openhouses_open_house_key_get_with_http_info(open_house_key, opts)
+      data, status_code, headers = openhouses_open_house_key_get_with_http_info(open_house_key, opts)
       return data
     end
 
@@ -145,19 +146,20 @@ module SimplyRetsClient
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
-      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+      _header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json']
-      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+      _header_content_type = ['application/json']
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-            auth_names = ['basicAuth']
+
+      auth_names = ['basicAuth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -174,8 +176,8 @@ module SimplyRetsClient
     # The SimplyRETS Listings API
     # This is the main endpoint for accessing your properties. View\nall of the available query parameters and make requests below!\nThe API uses Basic Authentication, which most HTTP libraries\nwill handle for you. To use the test data (which is what this\npages uses), you can use the api key `simplyrets` and secret\n`simplyrets`. Note that these test listings are not live MLS\nlistings but the data, query parameters, and response bodies\nwill all work the same.\n
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :q A textual keyword search. This parameter will search  the following\nfields, when available:\n\n  - listingId (This does _not_ search the &#39;mlsId&#39; field in the\nSimplyRETS response body)\n\n  - street number\n\n  - street name\n\n  - mls area (major)\n\n  - city\n\n  - subdivision name\n\n  - postal code\n\nNOTE\n
-    # @option opts [Array<String>] :status Request listings by a specific status. This parameter\ndefaults to active and you can specify multiple statuses\nin a single query.\n\n\nListing statuses depend on your MLS&#39;s availability. Below is\na brief description of each status with possible synonyms which\nmay map to your MLS-specific statuses\n- *Active*: Active Listing which is still on the market\n- *ActiveUnderContract*: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent\n- *Pending*: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract\n- *Hold*: The listing has been withdrawn from the market, but a contract\n\n  still exists between the seller and the listing member. Synonyms:\nHold, Hold Do Not Show, Temp Off Market\n- *Withdrawn*: The listing has been withdrawn from the market, but a contract\n\n  still exists between the seller and the listing member. Synonyms:\nHold, Hold Do Not Show, Temp Off Market\n- *Closed*: The purchase agreement has been fulfilled or the lease\n\n  agreement has been executed. Synonyms: Sold, Leased, Rented, Closed\nSale\n- *Expired*: The listing contract has expired\n- *Delete*: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap\n- *Incomplete*: The listing has not yet be completely entered and is not yet\n\n  published in the MLS. Synonyms: Draft, Partially Complted\n\n- *ComingSoon*\n
+    # @option opts [String] :q A textual keyword search. This parameter will search  the following\nfields, when available:\n  - listingId (This does _not_ search the &#39;mlsId&#39; field in the SimplyRETS response body)\n  - street number\n  - street name\n  - mls area (major)\n  - city\n  - subdivision name\n  - postal code\nNOTE\n
+    # @option opts [Array<String>] :status Request listings by a specific status. This parameter\ndefaults to active and you can specify multiple statuses\nin a single query.\n\nListing statuses depend on your MLS&#39;s availability. Below is\na brief description of each status with possible synonyms which\nmay map to your MLS-specific statuses\n- *Active*: Active Listing which is still on the market\n- *ActiveUnderContract*: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent\n- *Pending*: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract\n- *Hold*: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- *Withdrawn*: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- *Closed*: The purchase agreement has been fulfilled or the lease\n  agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale\n- *Expired*: The listing contract has expired\n- *Delete*: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap\n- *Incomplete*: The listing has not yet be completely entered and is not yet\n  published in the MLS. Synonyms: Draft, Partially Complted\n- *ComingSoon*\n
     # @option opts [Array<String>] :type Request listings by a specific property type. This\ndefaults to Residential and Rental. You can specify\nmultiple property types in a single query.\n
     # @option opts [String] :agent Filter the listings returned by an agent ID.  Note, the\nAgent ID is provided by your MLS.\n
     # @option opts [Array<String>] :brokers Filter the listings returned by brokerage with a Broker\nID. For some MLS areas, this is the ListOfficeId (Listing\nOffice ID).  You can specific multiple broker\nparameters. Note, this query parameter is only available\nif a Broker ID is provided by your MLS.\n
@@ -189,29 +191,29 @@ module SimplyRetsClient
     # @option opts [Integer] :maxbeds Filter listings by a maximum number of bedrooms.\n
     # @option opts [Integer] :maxdom Filter listings by a maximum number of days on market.\n_Note that your MLS must provide Days on Market data._\n
     # @option opts [Integer] :minyear Filter listings by a setting a minimum year built.\n
-    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the &#x60;offset&#x60; parameter, or the Link in the HTTP\nHeader.\n
+    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the `offset` parameter, or the Link in the HTTP\nHeader.\n
     # @option opts [Integer] :offset Used as a cursor for pagination. Increase the offset\nparameter by the limit to go to the next \&quot;page\&quot; of\nlistings. Also take a look at the Link HTTP Header for\npre-built pagination.\n
     # @option opts [String] :vendor Used to specify the vendor (MLS) to search from. This\nparameter is required on multi-MLS apps, and you can only\nquery one vendor at a time. To get your vendor id&#39;s make\nan OPTIONS request to https://api.simplyrets.com.\n
     # @option opts [Array<String>] :postal_codes Filter the listings returned by postal codes / zip\ncode. You can specify multiple.\n
-    # @option opts [Array<String>] :features Filter the listings by specific interior features.  You\ncan filter by multiple. For example, to filter trial listings\nby multiple features you can use,\nReturn listings that are within a set of latitude\nlongitude coordinates. For example,\n\n\n&#x60;&#x60;&#x60;\nWet Bar\nHigh Ceiling\n&#x60;&#x60;&#x60;\n\n\ne.g. &#x60;https://simplyrets.com/services?features&#x3D;Wet%20Bar&amp;features&#x3D;High%20Ceiling&#x60;\n\n\nThe features provided by your MLS can be seen in your\nOPTIONS request. To view all valid features, make a\nrequest to the SimplyRETS api root\n\n\n&#x60;curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/&#x60;\n
+    # @option opts [Array<String>] :features Filter the listings by specific interior features.  You\ncan filter by multiple. For example, to filter trial listings\nby multiple features you can use,\nReturn listings that are within a set of latitude\nlongitude coordinates. For example,\n\n```\nWet Bar\nHigh Ceiling\n```\n\ne.g. `https://simplyrets.com/services?features=Wet%20Bar&amp;features=High%20Ceiling`\n\nThe features provided by your MLS can be seen in your\nOPTIONS request. To view all valid features, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n
     # @option opts [String] :water Query water/waterfront listings only. Specify &#39;true&#39; to\nfilter waterfront listings.\n
     # @option opts [Array<String>] :neighborhoods Filter the listings returned by specific neighborhoods and\nsubdivisions. You can specify multiple.\n
     # @option opts [Array<String>] :cities Filter the listings returned by specific cities. You can\nspecify multiple.\n
     # @option opts [Array<String>] :counties Filter the listings returned by specific counties. You can\nspecify multiple.\n
-    # @option opts [Array<String>] :points Return listings that are within a set of latitude\nlongitude coordinates. For example;\n&#x60;&#x60;&#x60;\n29.723837,-95.69778\n29.938275,-95.69778\n29.938275,-95.32974\n29.723837,-95.32974\n&#x60;&#x60;&#x60;\nNote that some MLS&#39;s do not provide latitude and longitude\nfor their listings, which is required for this parameter\nto work. In these cases, SimplyRETS offers a [Geocoding\nAddon](https://simplyrets.com/services#geocoding).\n\n\nCheck out our\n[blog post](https://simplyrets.com/blog/interactive-map-search.html)\non using the &#x60;points&#x60; parameter to build a map-based app\nin javascript.\n
+    # @option opts [Array<String>] :points Return listings that are within a set of latitude\nlongitude coordinates. For example;\n```\n29.723837,-95.69778\n29.938275,-95.69778\n29.938275,-95.32974\n29.723837,-95.32974\n```\nNote that some MLS&#39;s do not provide latitude and longitude\nfor their listings, which is required for this parameter\nto work. In these cases, SimplyRETS offers a [Geocoding\nAddon](https://simplyrets.com/services#geocoding).\n\nCheck out our\n[blog post](https://simplyrets.com/blog/interactive-map-search.html)\non using the `points` parameter to build a map-based app\nin javascript.\n
     # @option opts [Array<String>] :include Include a extra fields which are not in the default\nresponse body\n- &#39;association&#39; includes additional HOA data\n- &#39;agreement&#39; information on the listing agreement\n- &#39;garageSpaces&#39; additional garage data\n- &#39;maintenanceExpense&#39; data on maintenance expenses\n- &#39;parking&#39; additional parking data\n- &#39;pool&#39; includes an additional pool description\n- &#39;taxAnnualAmount&#39; include the annual tax amount\n- &#39;taxYear&#39; include the tax year data\n- &#39;rooms&#39; include parameter will include\n   any additional rooms as a list.\n\nNote that your MLS must provide these fields in their RETS\ndata for them to be available in the API response.\n
     # @option opts [String] :sort Sort the response by a specific field. Values starting\nwith a minus (-) denote descending order, while the others\nare ascending.\n
     # @return [Array<Listing>]
     def properties_get(opts = {})
-      data, _status_code, _headers = properties_get_with_http_info(opts)
+      data, status_code, headers = properties_get_with_http_info(opts)
       return data
     end
 
     # The SimplyRETS Listings API
-    # This is the main endpoint for accessing your properties. View\nall of the available query parameters and make requests below!\nThe API uses Basic Authentication, which most HTTP libraries\nwill handle for you. To use the test data (which is what this\npages uses), you can use the api key &#x60;simplyrets&#x60; and secret\n&#x60;simplyrets&#x60;. Note that these test listings are not live MLS\nlistings but the data, query parameters, and response bodies\nwill all work the same.\n
+    # This is the main endpoint for accessing your properties. View\nall of the available query parameters and make requests below!\nThe API uses Basic Authentication, which most HTTP libraries\nwill handle for you. To use the test data (which is what this\npages uses), you can use the api key `simplyrets` and secret\n`simplyrets`. Note that these test listings are not live MLS\nlistings but the data, query parameters, and response bodies\nwill all work the same.\n
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :q A textual keyword search. This parameter will search  the following\nfields, when available:\n\n  - listingId (This does _not_ search the &#39;mlsId&#39; field in the\nSimplyRETS response body)\n\n  - street number\n\n  - street name\n\n  - mls area (major)\n\n  - city\n\n  - subdivision name\n\n  - postal code\n\nNOTE\n
-    # @option opts [Array<String>] :status Request listings by a specific status. This parameter\ndefaults to active and you can specify multiple statuses\nin a single query.\n\n\nListing statuses depend on your MLS&#39;s availability. Below is\na brief description of each status with possible synonyms which\nmay map to your MLS-specific statuses\n- *Active*: Active Listing which is still on the market\n- *ActiveUnderContract*: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent\n- *Pending*: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract\n- *Hold*: The listing has been withdrawn from the market, but a contract\n\n  still exists between the seller and the listing member. Synonyms:\nHold, Hold Do Not Show, Temp Off Market\n- *Withdrawn*: The listing has been withdrawn from the market, but a contract\n\n  still exists between the seller and the listing member. Synonyms:\nHold, Hold Do Not Show, Temp Off Market\n- *Closed*: The purchase agreement has been fulfilled or the lease\n\n  agreement has been executed. Synonyms: Sold, Leased, Rented, Closed\nSale\n- *Expired*: The listing contract has expired\n- *Delete*: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap\n- *Incomplete*: The listing has not yet be completely entered and is not yet\n\n  published in the MLS. Synonyms: Draft, Partially Complted\n\n- *ComingSoon*\n
+    # @option opts [String] :q A textual keyword search. This parameter will search  the following\nfields, when available:\n  - listingId (This does _not_ search the &#39;mlsId&#39; field in the SimplyRETS response body)\n  - street number\n  - street name\n  - mls area (major)\n  - city\n  - subdivision name\n  - postal code\nNOTE\n
+    # @option opts [Array<String>] :status Request listings by a specific status. This parameter\ndefaults to active and you can specify multiple statuses\nin a single query.\n\nListing statuses depend on your MLS&#39;s availability. Below is\na brief description of each status with possible synonyms which\nmay map to your MLS-specific statuses\n- *Active*: Active Listing which is still on the market\n- *ActiveUnderContract*: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent\n- *Pending*: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract\n- *Hold*: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- *Withdrawn*: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- *Closed*: The purchase agreement has been fulfilled or the lease\n  agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale\n- *Expired*: The listing contract has expired\n- *Delete*: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap\n- *Incomplete*: The listing has not yet be completely entered and is not yet\n  published in the MLS. Synonyms: Draft, Partially Complted\n- *ComingSoon*\n
     # @option opts [Array<String>] :type Request listings by a specific property type. This\ndefaults to Residential and Rental. You can specify\nmultiple property types in a single query.\n
     # @option opts [String] :agent Filter the listings returned by an agent ID.  Note, the\nAgent ID is provided by your MLS.\n
     # @option opts [Array<String>] :brokers Filter the listings returned by brokerage with a Broker\nID. For some MLS areas, this is the ListOfficeId (Listing\nOffice ID).  You can specific multiple broker\nparameters. Note, this query parameter is only available\nif a Broker ID is provided by your MLS.\n
@@ -225,16 +227,16 @@ module SimplyRetsClient
     # @option opts [Integer] :maxbeds Filter listings by a maximum number of bedrooms.\n
     # @option opts [Integer] :maxdom Filter listings by a maximum number of days on market.\n_Note that your MLS must provide Days on Market data._\n
     # @option opts [Integer] :minyear Filter listings by a setting a minimum year built.\n
-    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the &#x60;offset&#x60; parameter, or the Link in the HTTP\nHeader.\n
+    # @option opts [Integer] :limit Set the number of listings to return in the response.\nThis defaults to 20 listings, and can be a maximum of 50.\nTo paginate through to the next page of listings, take a\nlook at the `offset` parameter, or the Link in the HTTP\nHeader.\n
     # @option opts [Integer] :offset Used as a cursor for pagination. Increase the offset\nparameter by the limit to go to the next \&quot;page\&quot; of\nlistings. Also take a look at the Link HTTP Header for\npre-built pagination.\n
     # @option opts [String] :vendor Used to specify the vendor (MLS) to search from. This\nparameter is required on multi-MLS apps, and you can only\nquery one vendor at a time. To get your vendor id&#39;s make\nan OPTIONS request to https://api.simplyrets.com.\n
     # @option opts [Array<String>] :postal_codes Filter the listings returned by postal codes / zip\ncode. You can specify multiple.\n
-    # @option opts [Array<String>] :features Filter the listings by specific interior features.  You\ncan filter by multiple. For example, to filter trial listings\nby multiple features you can use,\nReturn listings that are within a set of latitude\nlongitude coordinates. For example,\n\n\n&#x60;&#x60;&#x60;\nWet Bar\nHigh Ceiling\n&#x60;&#x60;&#x60;\n\n\ne.g. &#x60;https://simplyrets.com/services?features&#x3D;Wet%20Bar&amp;features&#x3D;High%20Ceiling&#x60;\n\n\nThe features provided by your MLS can be seen in your\nOPTIONS request. To view all valid features, make a\nrequest to the SimplyRETS api root\n\n\n&#x60;curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/&#x60;\n
+    # @option opts [Array<String>] :features Filter the listings by specific interior features.  You\ncan filter by multiple. For example, to filter trial listings\nby multiple features you can use,\nReturn listings that are within a set of latitude\nlongitude coordinates. For example,\n\n```\nWet Bar\nHigh Ceiling\n```\n\ne.g. `https://simplyrets.com/services?features=Wet%20Bar&amp;features=High%20Ceiling`\n\nThe features provided by your MLS can be seen in your\nOPTIONS request. To view all valid features, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n
     # @option opts [String] :water Query water/waterfront listings only. Specify &#39;true&#39; to\nfilter waterfront listings.\n
     # @option opts [Array<String>] :neighborhoods Filter the listings returned by specific neighborhoods and\nsubdivisions. You can specify multiple.\n
     # @option opts [Array<String>] :cities Filter the listings returned by specific cities. You can\nspecify multiple.\n
     # @option opts [Array<String>] :counties Filter the listings returned by specific counties. You can\nspecify multiple.\n
-    # @option opts [Array<String>] :points Return listings that are within a set of latitude\nlongitude coordinates. For example;\n&#x60;&#x60;&#x60;\n29.723837,-95.69778\n29.938275,-95.69778\n29.938275,-95.32974\n29.723837,-95.32974\n&#x60;&#x60;&#x60;\nNote that some MLS&#39;s do not provide latitude and longitude\nfor their listings, which is required for this parameter\nto work. In these cases, SimplyRETS offers a [Geocoding\nAddon](https://simplyrets.com/services#geocoding).\n\n\nCheck out our\n[blog post](https://simplyrets.com/blog/interactive-map-search.html)\non using the &#x60;points&#x60; parameter to build a map-based app\nin javascript.\n
+    # @option opts [Array<String>] :points Return listings that are within a set of latitude\nlongitude coordinates. For example;\n```\n29.723837,-95.69778\n29.938275,-95.69778\n29.938275,-95.32974\n29.723837,-95.32974\n```\nNote that some MLS&#39;s do not provide latitude and longitude\nfor their listings, which is required for this parameter\nto work. In these cases, SimplyRETS offers a [Geocoding\nAddon](https://simplyrets.com/services#geocoding).\n\nCheck out our\n[blog post](https://simplyrets.com/blog/interactive-map-search.html)\non using the `points` parameter to build a map-based app\nin javascript.\n
     # @option opts [Array<String>] :include Include a extra fields which are not in the default\nresponse body\n- &#39;association&#39; includes additional HOA data\n- &#39;agreement&#39; information on the listing agreement\n- &#39;garageSpaces&#39; additional garage data\n- &#39;maintenanceExpense&#39; data on maintenance expenses\n- &#39;parking&#39; additional parking data\n- &#39;pool&#39; includes an additional pool description\n- &#39;taxAnnualAmount&#39; include the annual tax amount\n- &#39;taxYear&#39; include the tax year data\n- &#39;rooms&#39; include parameter will include\n   any additional rooms as a list.\n\nNote that your MLS must provide these fields in their RETS\ndata for them to be available in the API response.\n
     # @option opts [String] :sort Sort the response by a specific field. Values starting\nwith a minus (-) denote descending order, while the others\nare ascending.\n
     # @return [Array<(Array<Listing>, Fixnum, Hash)>] Array<Listing> data, response status code and response headers
@@ -242,10 +244,6 @@ module SimplyRetsClient
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DefaultApi#properties_get ..."
       end
-
-      #if opts[:'type'] && !['Residential', 'Rental', 'Multifamily', 'Condominium', 'Commercial', 'Land'].include?(opts[:'type'])
-      #  fail 'invalid value for "type", must be one of Residential, Rential, Multifamily, Condominium, Commercial, Land'
-      #end
 
       if opts[:'sort'] && !['listprice', '-listprice', 'listdate', '-listdate', 'beds', '-beds', 'baths', '-baths'].include?(opts[:'sort'])
         fail 'invalid value for "sort", must be one of listprice, -listprice, listdate, -listdate, beds, -beds, baths, -baths'
@@ -288,19 +286,20 @@ module SimplyRetsClient
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
-      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+      _header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json']
-      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+      _header_content_type = ['application/json']
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-            auth_names = ['basicAuth']
+
+      auth_names = ['basicAuth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -316,18 +315,18 @@ module SimplyRetsClient
 
     # Single Listing Endpoint
     # Use this endpoint for accessing a single listing. When you\nmake a search to the `/properties` endpoint, each listing in\nthe response will contain a unique `mlsId` field which should\nbe used to request that listing on this route.\n\nThe `mlsId` field is a unique identifier for a listing which\nis specific to the SimplyRETS API only.  It is different from\nthe `listingId` field is the public number given to a listing\nby the MLS and is not used here.\n
-    # @param mls_id The &#x60;mlsId&#x60; field is a unique identifier which is specific\nto the SimplyRETS API only.  This field is different from\nthe &#x60;listingId&#x60; field (which is the public number given to\na listing by the MLS and is not used here).\n
+    # @param mls_id The `mlsId` field is a unique identifier which is specific\nto the SimplyRETS API only.  This field is different from\nthe `listingId` field (which is the public number given to\na listing by the MLS and is not used here).\n
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :include Include a extra fields which are not in the default\nresponse body\n- &#39;association&#39; includes additional HOA data\n- &#39;agreement&#39; information on the listing agreement\n- &#39;garageSpaces&#39; additional garage data\n- &#39;maintenanceExpense&#39; data on maintenance expenses\n- &#39;parking&#39; additional parking data\n- &#39;pool&#39; includes an additional pool description\n- &#39;rooms&#39; include parameter will include\n   any additional rooms as a list.\n\nNote that your MLS must provide these fields in their RETS\ndata for them to be available with valid data in the API\nresponse. If your MLS does not offer these fields, they will\ncontain &#39;null&#39;.\n
     # @return [Listing]
     def properties_mls_id_get(mls_id, opts = {})
-      data, _status_code, _headers = properties_mls_id_get_with_http_info(mls_id, opts)
+      data, status_code, headers = properties_mls_id_get_with_http_info(mls_id, opts)
       return data
     end
 
     # Single Listing Endpoint
-    # Use this endpoint for accessing a single listing. When you\nmake a search to the &#x60;/properties&#x60; endpoint, each listing in\nthe response will contain a unique &#x60;mlsId&#x60; field which should\nbe used to request that listing on this route.\n\nThe &#x60;mlsId&#x60; field is a unique identifier for a listing which\nis specific to the SimplyRETS API only.  It is different from\nthe &#x60;listingId&#x60; field is the public number given to a listing\nby the MLS and is not used here.\n
-    # @param mls_id The &#x60;mlsId&#x60; field is a unique identifier which is specific\nto the SimplyRETS API only.  This field is different from\nthe &#x60;listingId&#x60; field (which is the public number given to\na listing by the MLS and is not used here).\n
+    # Use this endpoint for accessing a single listing. When you\nmake a search to the `/properties` endpoint, each listing in\nthe response will contain a unique `mlsId` field which should\nbe used to request that listing on this route.\n\nThe `mlsId` field is a unique identifier for a listing which\nis specific to the SimplyRETS API only.  It is different from\nthe `listingId` field is the public number given to a listing\nby the MLS and is not used here.\n
+    # @param mls_id The `mlsId` field is a unique identifier which is specific\nto the SimplyRETS API only.  This field is different from\nthe `listingId` field (which is the public number given to\na listing by the MLS and is not used here).\n
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :include Include a extra fields which are not in the default\nresponse body\n- &#39;association&#39; includes additional HOA data\n- &#39;agreement&#39; information on the listing agreement\n- &#39;garageSpaces&#39; additional garage data\n- &#39;maintenanceExpense&#39; data on maintenance expenses\n- &#39;parking&#39; additional parking data\n- &#39;pool&#39; includes an additional pool description\n- &#39;rooms&#39; include parameter will include\n   any additional rooms as a list.\n\nNote that your MLS must provide these fields in their RETS\ndata for them to be available with valid data in the API\nresponse. If your MLS does not offer these fields, they will\ncontain &#39;null&#39;.\n
     # @return [Array<(Listing, Fixnum, Hash)>] Listing data, response status code and response headers
@@ -350,19 +349,20 @@ module SimplyRetsClient
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
-      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+      _header_accept = ['application/json', 'application/vnd.simplyrets-v0.1+json']
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json']
-      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+      _header_content_type = ['application/json']
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-            auth_names = ['basicAuth']
+
+      auth_names = ['basicAuth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

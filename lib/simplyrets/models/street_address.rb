@@ -18,6 +18,9 @@ module SimplyRetsClient
     # Known cross street
     attr_accessor :cross_street
 
+    # State or province. Maps to the data dictionary field `StateOrProvince`.
+    attr_accessor :state
+
     # Street address country (United States or Canada)
     attr_accessor :country
 
@@ -26,6 +29,9 @@ module SimplyRetsClient
 
     # Name of the street
     attr_accessor :street_name
+
+    # Textual representation of the street number. This field\nis usually redundant with what's in `streetNumber` but is\noccassionally usefuly for street number which are actually\nalpha-numerical. For example, \"N63453\" or \"34556B\".\n\n**Added on 2016/05/02**\n
+    attr_accessor :street_number_text
 
     # City name
     attr_accessor :city
@@ -39,13 +45,25 @@ module SimplyRetsClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+
         :'cross_street' => :'crossStreet',
+
+        :'state' => :'state',
+
         :'country' => :'country',
+
         :'postal_code' => :'postalCode',
+
         :'street_name' => :'streetName',
+
+        :'street_number_text' => :'streetNumberText',
+
         :'city' => :'city',
+
         :'street_number' => :'streetNumber',
+
         :'full' => :'full'
+
       }
     end
 
@@ -53,110 +71,126 @@ module SimplyRetsClient
     def self.swagger_types
       {
         :'cross_street' => :'String',
+        :'state' => :'String',
         :'country' => :'String',
         :'postal_code' => :'String',
         :'street_name' => :'String',
+        :'street_number_text' => :'String',
         :'city' => :'String',
         :'street_number' => :'Integer',
         :'full' => :'String'
+
       }
     end
 
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+
 
       if attributes[:'crossStreet']
         self.cross_street = attributes[:'crossStreet']
       else
         self.cross_street = "456 Cross Rd"
       end
+
+      if attributes[:'state']
+        self.state = attributes[:'state']
+      else
+        self.state = "Texas"
+      end
+
       if attributes[:'country']
         self.country = attributes[:'country']
       else
         self.country = "United States"
       end
+
       if attributes[:'postalCode']
         self.postal_code = attributes[:'postalCode']
       else
         self.postal_code = "77324"
       end
+
       if attributes[:'streetName']
         self.street_name = attributes[:'streetName']
       else
         self.street_name = "SimplyRETS Drive"
       end
+
+      if attributes[:'streetNumberText']
+        self.street_number_text = attributes[:'streetNumberText']
+      else
+        self.street_number_text = "1234"
+      end
+
       if attributes[:'city']
         self.city = attributes[:'city']
       else
         self.city = "Houston"
       end
+
       if attributes[:'streetNumber']
         self.street_number = attributes[:'streetNumber']
       else
         self.street_number = 1234
       end
+
       if attributes[:'full']
         self.full = attributes[:'full']
       else
         self.full = "1234 SimplyRETS Drive"
       end
+
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
+    # Check equality by comparing each attribute.
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           cross_street == o.cross_street &&
+          state == o.state &&
           country == o.country &&
           postal_code == o.postal_code &&
           street_name == o.street_name &&
+          street_number_text == o.street_number_text &&
           city == o.city &&
           street_number == o.street_number &&
           full == o.full
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # Calculate hash code according to all attributes.
     def hash
-      [cross_street, country, postal_code, street_name, city, street_number, full].hash
+      [cross_street, state, country, postal_code, street_name, street_number_text, city, street_number, full].hash
     end
 
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    # build the object from hash
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /^Array<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          else
+            #TODO show warning in debug mode
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        else
+          # data not found in attributes(hash), not an issue as the data can be optional
+        end
       end
 
       self
     end
 
-    # Deserializes the data based on type
-    # @param string type Data type
-    # @param string value Value to be deserialized
-    # @return [Object] Deserialized data
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
@@ -190,25 +224,21 @@ module SimplyRetsClient
           end
         end
       else # model
-        temp_model = SimplyRetsClient.const_get(type).new
-        temp_model.build_from_hash(value)
+        _model = SimplyRetsClient.const_get(type).new
+        _model.build_from_hash(value)
       end
     end
 
-    # Returns the string representation of the object
-    # @return [String] String presentation of the object
     def to_s
       to_hash.to_s
     end
 
-    # to_body is an alias to to_hash (backward compatibility)
-    # @return [Hash] Returns the object in the form of hash
+    # to_body is an alias to to_body (backward compatibility))
     def to_body
       to_hash
     end
 
-    # Returns the object in the form of hash
-    # @return [Hash] Returns the object in the form of hash
+    # return the object in the form of hash
     def to_hash
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
@@ -219,10 +249,8 @@ module SimplyRetsClient
       hash
     end
 
-    # Outputs non-array value in the form of hash
+    # Method to output non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value
-    # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
         value.compact.map{ |v| _to_hash(v) }

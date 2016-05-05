@@ -15,7 +15,7 @@ require 'date'
 module SimplyRetsClient
   # RETS MLS Vendor Data
   class MlsInformation
-    # MLS Status Code. Compliant with data dictionary v1.3 ListingStatus\nListing statuses depend on your MLS's availability. Below is\na brief description of each status with possible synonyms which\nmay map to your MLS-specific statuses\n- Active: Active Listing which is still on the market\n- ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent\n- Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract\n- Hold: The listing has been withdrawn from the market, but a contract\n\n  still exists between the seller and the listing member. Synonyms:\nHold, Hold Do Not Show, Temp Off Market\n- Withdrawn: The listing has been withdrawn from the market, but a contract\n\n  still exists between the seller and the listing member. Synonyms:\nHold, Hold Do Not Show, Temp Off Market\n- Closed: The purchase agreement has been fulfilled or the lease\n\n  agreement has been executed. Synonyms: Sold, Leased, Rented, Closed\nSale\n- Expired: The listing contract has expired\n- Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap\n- Incomplete: The listing has not yet be completely entered and is not yet\n\n  published in the MLS. Synonyms: Draft, Partially Complted\n\n- ComingSoon\n
+    # MLS Status Code. Compliant with data dictionary v1.3 ListingStatus\nListing statuses depend on your MLS's availability. Below is\na brief description of each status with possible synonyms which\nmay map to your MLS-specific statuses\n- Active: Active Listing which is still on the market\n- ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent\n- Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract\n- Hold: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- Withdrawn: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- Closed: The purchase agreement has been fulfilled or the lease\n  agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale\n- Expired: The listing contract has expired\n- Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap\n- Incomplete: The listing has not yet be completely entered and is not yet\n  published in the MLS. Synonyms: Draft, Partially Complted\n- ComingSoon\n
     attr_accessor :status
 
     # MLS Area. Generally a subdivision or community name.
@@ -30,10 +30,15 @@ module SimplyRetsClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+
         :'status' => :'status',
+
         :'area' => :'area',
+
         :'days_on_market' => :'daysOnMarket',
+
         :'serving_name' => :'servingName'
+
       }
     end
 
@@ -44,33 +49,36 @@ module SimplyRetsClient
         :'area' => :'String',
         :'days_on_market' => :'Integer',
         :'serving_name' => :'String'
+
       }
     end
 
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+
 
       if attributes[:'status']
         self.status = attributes[:'status']
       end
+
       if attributes[:'area']
         self.area = attributes[:'area']
       end
+
       if attributes[:'daysOnMarket']
         self.days_on_market = attributes[:'daysOnMarket']
       end
+
       if attributes[:'servingName']
         self.serving_name = attributes[:'servingName']
       end
+
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
     def status=(status)
       allowed_values = ["Active", "ActiveUnderContract (Backup-Offer)", "Pending", "Hold", "Withdrawn", "Closed", "Expired", "Delete", "Incomplete", "ComingSoon"]
       if status && !allowed_values.include?(status)
@@ -79,8 +87,7 @@ module SimplyRetsClient
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
+    # Check equality by comparing each attribute.
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -91,41 +98,35 @@ module SimplyRetsClient
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # Calculate hash code according to all attributes.
     def hash
       [status, area, days_on_market, serving_name].hash
     end
 
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    # build the object from hash
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /^Array<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          else
+            #TODO show warning in debug mode
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        else
+          # data not found in attributes(hash), not an issue as the data can be optional
+        end
       end
 
       self
     end
 
-    # Deserializes the data based on type
-    # @param string type Data type
-    # @param string value Value to be deserialized
-    # @return [Object] Deserialized data
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
@@ -159,25 +160,21 @@ module SimplyRetsClient
           end
         end
       else # model
-        temp_model = SimplyRetsClient.const_get(type).new
-        temp_model.build_from_hash(value)
+        _model = SimplyRetsClient.const_get(type).new
+        _model.build_from_hash(value)
       end
     end
 
-    # Returns the string representation of the object
-    # @return [String] String presentation of the object
     def to_s
       to_hash.to_s
     end
 
-    # to_body is an alias to to_hash (backward compatibility)
-    # @return [Hash] Returns the object in the form of hash
+    # to_body is an alias to to_body (backward compatibility))
     def to_body
       to_hash
     end
 
-    # Returns the object in the form of hash
-    # @return [Hash] Returns the object in the form of hash
+    # return the object in the form of hash
     def to_hash
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
@@ -188,10 +185,8 @@ module SimplyRetsClient
       hash
     end
 
-    # Outputs non-array value in the form of hash
+    # Method to output non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value
-    # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
         value.compact.map{ |v| _to_hash(v) }

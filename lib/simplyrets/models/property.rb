@@ -64,7 +64,7 @@ module SimplyRetsClient
     # The properties interior features
     attr_accessor :interior_features
 
-    # Square footage of the entire property lot
+    # Lot size dimensions or square footage as a text. This\nfield is generally used to show the pretty formatted\nlot size.\n
     attr_accessor :lot_size
 
     attr_accessor :area_source
@@ -92,6 +92,9 @@ module SimplyRetsClient
 
     attr_accessor :parking
 
+    # Unit of measurement for the lotSizeArea field.  e.g. Square\nFeet, Square Meters, Acres, etc.\n\nIf this field is `null` the units is the default unit\nof measure specified by your RETS provider.\n\n**Added on 2016/05/04 - Not available for all RETS vendors**\n
+    attr_accessor :lot_size_area_units
+
     # Abbreviated property type. RES is Residential, CND is CondoOrTownhome,\nRNT is Rental, MLF is Multi-Family, CRE is Commercial, LND is Land,\nFRM is Farm. See the 'propertySubType' field for more information.\n
     attr_accessor :type
 
@@ -108,39 +111,75 @@ module SimplyRetsClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+
         :'roof' => :'roof',
+
         :'cooling' => :'cooling',
+
         :'style' => :'style',
+
         :'area' => :'area',
+
         :'baths_full' => :'bathsFull',
+
         :'baths_half' => :'bathsHalf',
+
         :'stories' => :'stories',
+
         :'fireplaces' => :'fireplaces',
+
         :'flooring' => :'flooring',
+
         :'heating' => :'heating',
+
         :'foundation' => :'foundation',
+
         :'pool_features' => :'poolFeatures',
+
         :'laundry_features' => :'laundryFeatures',
+
         :'occupant_name' => :'occupantName',
+
         :'lot_description' => :'lotDescription',
+
         :'sub_type' => :'subType',
+
         :'bedrooms' => :'bedrooms',
+
         :'interior_features' => :'interiorFeatures',
+
         :'lot_size' => :'lotSize',
+
         :'area_source' => :'areaSource',
+
         :'maintenance_expense' => :'maintenanceExpense',
+
         :'additional_rooms' => :'additionalRooms',
+
         :'exterior_features' => :'exteriorFeatures',
+
         :'water' => :'water',
+
         :'view' => :'view',
+
         :'subdivision' => :'subdivision',
+
         :'construction' => :'construction',
+
         :'parking' => :'parking',
+
+        :'lot_size_area_units' => :'lotSizeAreaUnits',
+
         :'type' => :'type',
+
         :'garage_spaces' => :'garageSpaces',
+
         :'accessibility' => :'accessibility',
+
         :'occupant_type' => :'occupantType',
+
         :'year_built' => :'yearBuilt'
+
       }
     end
 
@@ -175,153 +214,192 @@ module SimplyRetsClient
         :'subdivision' => :'String',
         :'construction' => :'String',
         :'parking' => :'School',
+        :'lot_size_area_units' => :'String',
         :'type' => :'String',
         :'garage_spaces' => :'Float',
         :'accessibility' => :'String',
         :'occupant_type' => :'String',
         :'year_built' => :'Integer'
+
       }
     end
 
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+
 
       if attributes[:'roof']
         self.roof = attributes[:'roof']
       else
         self.roof = "Composition"
       end
+
       if attributes[:'cooling']
         self.cooling = attributes[:'cooling']
       end
+
       if attributes[:'style']
         self.style = attributes[:'style']
       else
         self.style = "Ranch, Traditional"
       end
+
       if attributes[:'area']
         self.area = attributes[:'area']
       else
         self.area = 5984
       end
+
       if attributes[:'bathsFull']
         self.baths_full = attributes[:'bathsFull']
       end
+
       if attributes[:'bathsHalf']
         self.baths_half = attributes[:'bathsHalf']
       end
+
       if attributes[:'stories']
         self.stories = attributes[:'stories']
       else
         self.stories = 2.0
       end
+
       if attributes[:'fireplaces']
         self.fireplaces = attributes[:'fireplaces']
       else
         self.fireplaces = 1
       end
+
       if attributes[:'flooring']
         self.flooring = attributes[:'flooring']
       end
+
       if attributes[:'heating']
         self.heating = attributes[:'heating']
       else
         self.heating = "Central System, Forced Air, Gas"
       end
+
       if attributes[:'foundation']
         self.foundation = attributes[:'foundation']
       end
+
       if attributes[:'poolFeatures']
         self.pool_features = attributes[:'poolFeatures']
       end
+
       if attributes[:'laundryFeatures']
         self.laundry_features = attributes[:'laundryFeatures']
       end
+
       if attributes[:'occupantName']
         self.occupant_name = attributes[:'occupantName']
       end
+
       if attributes[:'lotDescription']
         self.lot_description = attributes[:'lotDescription']
       end
+
       if attributes[:'subType']
         self.sub_type = attributes[:'subType']
       end
+
       if attributes[:'bedrooms']
         self.bedrooms = attributes[:'bedrooms']
       else
         self.bedrooms = 5
       end
+
       if attributes[:'interiorFeatures']
         self.interior_features = attributes[:'interiorFeatures']
       else
         self.interior_features = "2-Story Foyer,9 ft + Ceil Main,Cathedral Ceiling,Double Vnty\nOther,High Speed Internet Available,Entrance Foyer,Hardwood\nFloors,Trey Ceilings,Walk-In Closet(s),Wall/Wall Carpet\n"
       end
+
       if attributes[:'lotSize']
         self.lot_size = attributes[:'lotSize']
       else
         self.lot_size = "3/4 Up To 1 Acre"
       end
+
       if attributes[:'areaSource']
         self.area_source = attributes[:'areaSource']
       else
         self.area_source = "Tax Record"
       end
+
       if attributes[:'maintenanceExpense']
         self.maintenance_expense = attributes[:'maintenanceExpense']
       end
+
       if attributes[:'additionalRooms']
         self.additional_rooms = attributes[:'additionalRooms']
       end
+
       if attributes[:'exteriorFeatures']
         self.exterior_features = attributes[:'exteriorFeatures']
       else
         self.exterior_features = "1-2 Step Entry,Barn(s),Fenced Yard,Front Porch,Garden\nArea,Guest House,Out-Buildings,Patio,Prof Landscaping\n"
       end
+
       if attributes[:'water']
         self.water = attributes[:'water']
       end
+
       if attributes[:'view']
         self.view = attributes[:'view']
       end
+
       if attributes[:'subdivision']
         self.subdivision = attributes[:'subdivision']
       else
         self.subdivision = "River Oaks"
       end
+
       if attributes[:'construction']
         self.construction = attributes[:'construction']
       end
+
       if attributes[:'parking']
         self.parking = attributes[:'parking']
       end
+
+      if attributes[:'lotSizeAreaUnits']
+        self.lot_size_area_units = attributes[:'lotSizeAreaUnits']
+      else
+        self.lot_size_area_units = "Sq Ft"
+      end
+
       if attributes[:'type']
         self.type = attributes[:'type']
       else
         self.type = "RES"
       end
+
       if attributes[:'garageSpaces']
         self.garage_spaces = attributes[:'garageSpaces']
       end
+
       if attributes[:'accessibility']
         self.accessibility = attributes[:'accessibility']
       end
+
       if attributes[:'occupantType']
         self.occupant_type = attributes[:'occupantType']
       end
+
       if attributes[:'yearBuilt']
         self.year_built = attributes[:'yearBuilt']
       else
         self.year_built = 2007
       end
+
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
     def type=(type)
       allowed_values = ["RES", "CND", "RNT", "MLF", "CRE", "LND", "FRM"]
       if type && !allowed_values.include?(type)
@@ -330,8 +408,7 @@ module SimplyRetsClient
       @type = type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
+    # Check equality by comparing each attribute.
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -363,6 +440,7 @@ module SimplyRetsClient
           subdivision == o.subdivision &&
           construction == o.construction &&
           parking == o.parking &&
+          lot_size_area_units == o.lot_size_area_units &&
           type == o.type &&
           garage_spaces == o.garage_spaces &&
           accessibility == o.accessibility &&
@@ -371,41 +449,35 @@ module SimplyRetsClient
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # Calculate hash code according to all attributes.
     def hash
-      [roof, cooling, style, area, baths_full, baths_half, stories, fireplaces, flooring, heating, foundation, pool_features, laundry_features, occupant_name, lot_description, sub_type, bedrooms, interior_features, lot_size, area_source, maintenance_expense, additional_rooms, exterior_features, water, view, subdivision, construction, parking, type, garage_spaces, accessibility, occupant_type, year_built].hash
+      [roof, cooling, style, area, baths_full, baths_half, stories, fireplaces, flooring, heating, foundation, pool_features, laundry_features, occupant_name, lot_description, sub_type, bedrooms, interior_features, lot_size, area_source, maintenance_expense, additional_rooms, exterior_features, water, view, subdivision, construction, parking, lot_size_area_units, type, garage_spaces, accessibility, occupant_type, year_built].hash
     end
 
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    # build the object from hash
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /^Array<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          else
+            #TODO show warning in debug mode
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        else
+          # data not found in attributes(hash), not an issue as the data can be optional
+        end
       end
 
       self
     end
 
-    # Deserializes the data based on type
-    # @param string type Data type
-    # @param string value Value to be deserialized
-    # @return [Object] Deserialized data
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
@@ -439,25 +511,21 @@ module SimplyRetsClient
           end
         end
       else # model
-        temp_model = SimplyRetsClient.const_get(type).new
-        temp_model.build_from_hash(value)
+        _model = SimplyRetsClient.const_get(type).new
+        _model.build_from_hash(value)
       end
     end
 
-    # Returns the string representation of the object
-    # @return [String] String presentation of the object
     def to_s
       to_hash.to_s
     end
 
-    # to_body is an alias to to_hash (backward compatibility)
-    # @return [Hash] Returns the object in the form of hash
+    # to_body is an alias to to_body (backward compatibility))
     def to_body
       to_hash
     end
 
-    # Returns the object in the form of hash
-    # @return [Hash] Returns the object in the form of hash
+    # return the object in the form of hash
     def to_hash
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
@@ -468,10 +536,8 @@ module SimplyRetsClient
       hash
     end
 
-    # Outputs non-array value in the form of hash
+    # Method to output non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value
-    # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
         value.compact.map{ |v| _to_hash(v) }

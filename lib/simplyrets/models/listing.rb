@@ -75,33 +75,60 @@ module SimplyRetsClient
     # Information about the status of the existing lease on the property.
     attr_accessor :lease_type
 
+    # The URL for an unbranded virtual tour of the property.\n\n**Added on 2016/05/04 - Not available for all RETS vendors**\n
+    attr_accessor :virtual_tour_url
+
     # Description or remarks
     attr_accessor :remarks
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+
         :'private_remarks' => :'privateRemarks',
+
         :'property' => :'property',
+
         :'mls_id' => :'mlsId',
+
         :'showing_instructions' => :'showingInstructions',
+
         :'office' => :'office',
+
         :'lease_term' => :'leaseTerm',
+
         :'disclaimer' => :'disclaimer',
+
         :'address' => :'address',
+
         :'list_date' => :'listDate',
+
         :'agent' => :'agent',
+
         :'modified' => :'modified',
+
         :'school' => :'school',
+
         :'photos' => :'photos',
+
         :'list_price' => :'listPrice',
+
         :'listing_id' => :'listingId',
+
         :'mls' => :'mls',
+
         :'geo' => :'geo',
+
         :'tax' => :'tax',
+
         :'sales' => :'sales',
+
         :'lease_type' => :'leaseType',
+
+        :'virtual_tour_url' => :'virtualTourUrl',
+
         :'remarks' => :'remarks'
+
       }
     end
 
@@ -128,89 +155,114 @@ module SimplyRetsClient
         :'tax' => :'Tax',
         :'sales' => :'Sales',
         :'lease_type' => :'String',
+        :'virtual_tour_url' => :'String',
         :'remarks' => :'String'
+
       }
     end
 
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+
 
       if attributes[:'privateRemarks']
         self.private_remarks = attributes[:'privateRemarks']
       end
+
       if attributes[:'property']
         self.property = attributes[:'property']
       end
+
       if attributes[:'mlsId']
         self.mls_id = attributes[:'mlsId']
       else
         self.mls_id = 329479823
       end
+
       if attributes[:'showingInstructions']
         self.showing_instructions = attributes[:'showingInstructions']
       end
+
       if attributes[:'office']
         self.office = attributes[:'office']
       end
+
       if attributes[:'leaseTerm']
         self.lease_term = attributes[:'leaseTerm']
       end
+
       if attributes[:'disclaimer']
         self.disclaimer = attributes[:'disclaimer']
       end
+
       if attributes[:'address']
         self.address = attributes[:'address']
       end
+
       if attributes[:'listDate']
         self.list_date = attributes[:'listDate']
       end
+
       if attributes[:'agent']
         self.agent = attributes[:'agent']
       end
+
       if attributes[:'modified']
         self.modified = attributes[:'modified']
       end
+
       if attributes[:'school']
         self.school = attributes[:'school']
       end
+
       if attributes[:'photos']
         if (value = attributes[:'photos']).is_a?(Array)
           self.photos = value
         end
       end
+
       if attributes[:'listPrice']
         self.list_price = attributes[:'listPrice']
       end
+
       if attributes[:'listingId']
         self.listing_id = attributes[:'listingId']
       end
+
       if attributes[:'mls']
         self.mls = attributes[:'mls']
       end
+
       if attributes[:'geo']
         self.geo = attributes[:'geo']
       end
+
       if attributes[:'tax']
         self.tax = attributes[:'tax']
       end
+
       if attributes[:'sales']
         self.sales = attributes[:'sales']
       end
+
       if attributes[:'leaseType']
         self.lease_type = attributes[:'leaseType']
       end
+
+      if attributes[:'virtualTourUrl']
+        self.virtual_tour_url = attributes[:'virtualTourUrl']
+      end
+
       if attributes[:'remarks']
         self.remarks = attributes[:'remarks']
       end
+
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
+    # Check equality by comparing each attribute.
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -234,45 +286,40 @@ module SimplyRetsClient
           tax == o.tax &&
           sales == o.sales &&
           lease_type == o.lease_type &&
+          virtual_tour_url == o.virtual_tour_url &&
           remarks == o.remarks
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # Calculate hash code according to all attributes.
     def hash
-      [private_remarks, property, mls_id, showing_instructions, office, lease_term, disclaimer, address, list_date, agent, modified, school, photos, list_price, listing_id, mls, geo, tax, sales, lease_type, remarks].hash
+      [private_remarks, property, mls_id, showing_instructions, office, lease_term, disclaimer, address, list_date, agent, modified, school, photos, list_price, listing_id, mls, geo, tax, sales, lease_type, virtual_tour_url, remarks].hash
     end
 
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    # build the object from hash
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /^Array<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          else
+            #TODO show warning in debug mode
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        else
+          # data not found in attributes(hash), not an issue as the data can be optional
+        end
       end
 
       self
     end
 
-    # Deserializes the data based on type
-    # @param string type Data type
-    # @param string value Value to be deserialized
-    # @return [Object] Deserialized data
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
@@ -306,25 +353,21 @@ module SimplyRetsClient
           end
         end
       else # model
-        temp_model = SimplyRetsClient.const_get(type).new
-        temp_model.build_from_hash(value)
+        _model = SimplyRetsClient.const_get(type).new
+        _model.build_from_hash(value)
       end
     end
 
-    # Returns the string representation of the object
-    # @return [String] String presentation of the object
     def to_s
       to_hash.to_s
     end
 
-    # to_body is an alias to to_hash (backward compatibility)
-    # @return [Hash] Returns the object in the form of hash
+    # to_body is an alias to to_body (backward compatibility))
     def to_body
       to_hash
     end
 
-    # Returns the object in the form of hash
-    # @return [Hash] Returns the object in the form of hash
+    # return the object in the form of hash
     def to_hash
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
@@ -335,10 +378,8 @@ module SimplyRetsClient
       hash
     end
 
-    # Outputs non-array value in the form of hash
+    # Method to output non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value
-    # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
         value.compact.map{ |v| _to_hash(v) }

@@ -9,6 +9,8 @@ generate: ruby-client.zip
 
 	sed -i 's/SwaggerClient/SimplyRetsClient/g' $(FILES)
 	sed -i 's/swagger_client/simplyrets/g' $(FILES)
+	sed -i 's/VERSION = "1.0.0"/VERSION = "2.0.0"/g' $(FILES)
+	sed -i 's/simplyrets (1.0.0)/simplyrets (2.0.0)/g' $(FILES)
 
 	git grep -I --name-only -z -e '' | \
 		xargs -0 sed -i -e 's/[ \t]\+\(\r\?\)$$/\1/'

@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "simplyrets/simplyrets/version"
+require "simplyrets/version"
 
 Gem::Specification.new do |s|
 
   s.name        = "simplyrets"
-  s.version     = SimplyRetsClient::SimplyRets::VERSION
+  s.version     = SimplyRetsClient::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Christopher Reichert", "Cody Reichert"]
   s.email       = ["christopher@simplyrets.com", "cody@simplyrets.com"]
@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
   s.description = %q{This gem provides a SimplyRETS SDK for creating real estate software with RETS data}
   s.license     = "MIT"
 
-  s.add_runtime_dependency 'typhoeus', '~> 0.2', '>= 0.2.1'
-  s.add_runtime_dependency 'json', '~> 1.4', '>= 1.4.6'
+  s.add_runtime_dependency 'typhoeus', '~> 0.8', '>= 0.8'
+  s.add_runtime_dependency 'json', '~> 1.8', '>= 1.8.3'
 
   s.add_development_dependency 'rspec', '~> 3.2', '>= 3.2.0'
   s.add_development_dependency 'vcr', '~> 2.9', '>= 2.9.3'

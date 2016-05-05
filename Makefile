@@ -29,3 +29,4 @@ ruby-client.zip:
 
 test:
 	bundle exec ./example.rb
+	bundle exec rspec

@@ -120,6 +120,38 @@ describe 'DefaultApi' do
     end
   end
 
+  describe 'properties_get property type query param' do
+    it "should work" do
+      SimplyRetsClient.configure do |config|
+        config.username = 'simplyrets'
+        config.password = 'simplyrets'
+      end
+
+      api = SimplyRetsClient::DefaultApi.new
+      listings = api.properties_get({:limit => 1, :type => ["RNT"]})
+
+      listings.find { |l| l.property.type == "RNT" }.should_not be_nil
+      listings.find { |l| l.property.type == "RES" }.should be_nil
+    end
+  end
+
+
+  describe 'properties_get multiple property types query param' do
+    it "should work" do
+      SimplyRetsClient.configure do |config|
+        config.username = 'simplyrets'
+        config.password = 'simplyrets'
+      end
+
+      api = SimplyRetsClient::DefaultApi.new
+      listings = api.properties_get({:limit => 20, :type => ["RNT","LND"]})
+
+      listings.find { |l| l.property.type == "RNT" }.should_not be_nil
+      listings.find { |l| l.property.type == "LND" }.should_not be_nil
+      listings.find { |l| l.property.type == "RES" }.should be_nil
+    end
+  end
+
   # unit tests for properties_mls_id_get
   # Single Listing Endpoint
   # Use this endpoint for accessing a single listing. When you\nmake a search to the &#x60;/properties&#x60; endpoint, each listing in\nthe response will contain a unique &#x60;mlsId&#x60; field which should\nbe used to request that listing on this route.\n\nThe &#x60;mlsId&#x60; field is a unique identifier for a listing which\nis specific to the SimplyRETS API only.  It is different from\nthe &#x60;listingId&#x60; field is the public number given to a listing\nby the MLS and is not used here.\n

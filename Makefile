@@ -15,6 +15,8 @@ generate: ruby-client.zip
 	git grep -I --name-only -z -e '' | \
 		xargs -0 sed -i -e 's/[ \t]\+\(\r\?\)$$/\1/'
 
+	patch -p1 < multi-query-param.patch
+
 ruby-client.zip:
 	curl -XPOST http://generator.swagger.io/api/gen/clients/ruby			\
 		--verbose -D - --fail --show-error --insecure -s			\

@@ -332,3 +332,39 @@ module SimplyRetsClient
     end
   end
 end
+
+
+# PATCH: array parameter rendering
+#
+# Typheous defaults to rendering array query parameters with
+# an index:
+#
+# ?points[0]=23.232,-98.232&points[1]=23.232,-98.232
+#
+# The simplyrets api uses the form:
+#
+# ?points=23.232,-98.232&points=23.232,-98.232
+#
+# this monkey-patch removes the array index when the query
+# parameter is rendered.
+module Ethon
+  class Easy
+    module Queryable
+      private
+      def recursively_generate_pairs(h, prefix, pairs)
+        case h
+        when Hash
+          h.each_pair do |k,v|
+            key = prefix.nil? ? k : "#{prefix}"
+            pairs_for(v, key, pairs)
+          end
+        when Array
+          h.each_with_index do |v, i|
+            key = "#{prefix}"
+            pairs_for(v, key, pairs)
+          end
+        end
+      end
+    end
+  end
+end

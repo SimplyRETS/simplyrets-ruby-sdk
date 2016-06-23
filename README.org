@@ -1,6 +1,8 @@
 #+AUTHOR: SimplyRETS, Christopher Reichert, Cody Reichert
 #+TITLE: SimplyRETS Ruby SDK (Beta)
 
+*Deprecation Notice: This SDK is deprecated and will not receive any future updates. The recommended workflow is to use the [[https://docs.simplyrets.com/api/index.html][API]] directly, or generate an SDK for your use-case from the [[https://docs.simplyrets.com/api/resources.json][Swagger Spec]]*
+
 The official Ruby SDK for the [[https://simplyrets.com][SimplyRETS]] Listings API.
 
 SimplyRETS provides a modern and simple interface for building robust

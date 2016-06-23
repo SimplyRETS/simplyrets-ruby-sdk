@@ -1,12 +1,23 @@
 =begin
 SimplyRETS API
 
-The SimplyRETS API is an exciting step towards making it easier for\ndevelopers and real estate agents to build something awesome with\nreal estate data!\n\nThe documentation below makes live requests to our API using the\ntrial data. To get set up with the API using live MLS data, you\nmust have RETS credentials from your MLS, which you can then use to\ncreate an app with SimplyRETS. For more information on that\nprocess, please see our [FAQ](https://simplyrets.com/faq), [Getting\nStarted](https://simplyrets.com/blog/getting-set-up.html) page, or\n[contact us](https://simplyrets.com/\\#home-contact).\n\nBelow you'll find the API endpoints, query parameters, response bodies,\nand other information about using the SimplyRETS API. You can run\nqueries by clicking the 'Try it Out' button at the bottom of each\nsection.\n\n### Authentication\nThe SimplyRETS API uses Basic Authentication. When you create an\napp, you'll get a set of API credentials to access your\nlistings. If you're trying out the test data, you can use\n`simplyrets:simplyrets` for connecting to the API.\n\n### Media Types\nThe SimplyRETS API uses the `Accept` header to allow clients to\ncontrol media types (content versions). We maintain backwards\ncompatibility with API clients by allowing them to specify a\ncontent version. We highly recommend setting and explicity media\ntype when your application reaches production. Both the structure\nand content of our API response bodies is subject to change so we\ncan add new features while respecting the stability of applications\nwhich have already been developed.\n\nTo always use the latest SimplyRETS content version, simply use\n`application/json` in your application `Accept` header.\n\nIf you want to pin your clients media type to a specific version,\nyou can use the vendor-specific SimplyRETS media type, e.g.\n`application/vnd.simplyrets-v0.1+json\"`\n\nTo view all valid content-types for making an `OPTIONS`, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n\nThe default media types used in our API responses may change in the\nfuture. If you're building an application and care about the\nstability of the API, be sure to request a specific media type in the\nAccept header as shown in the examples below.\n\nThe wordpress plugin automatically sets the `Accept` header for the\ncompatible SimplyRETS media types.\n\n### Pagination\nThere a few pieces of useful information about each request stored\nin the HTTP Headers:\n\n- `X-Total-Count` shows you the total amount of listings that match\n  your current query.\n- `Link` contains pre-built pagination links for accessing the next\n'page' of listings that match your query. Read more about that\n[here](https://simplyrets.com/blog/api-pagination.html).\n
+The SimplyRETS API is an exciting step towards making it easier for developers and real estate agents to build something awesome with real estate data!  The documentation below makes live requests to our API using the trial data. To get set up with the API using live MLS data, you must have RETS credentials from your MLS, which you can then use to create an app with SimplyRETS. For more information on that process, please see our [FAQ](https://simplyrets.com/faq), [Getting Started](https://simplyrets.com/blog/getting-set-up.html) page, or [contact us](https://simplyrets.com/\\#home-contact).  Below you'll find the API endpoints, query parameters, response bodies, and other information about using the SimplyRETS API. You can run queries by clicking the 'Try it Out' button at the bottom of each section.  ### Authentication The SimplyRETS API uses Basic Authentication. When you create an app, you'll get a set of API credentials to access your listings. If you're trying out the test data, you can use `simplyrets:simplyrets` for connecting to the API.  ### Media Types The SimplyRETS API uses the `Accept` header to allow clients to control media types (content versions). We maintain backwards compatibility with API clients by allowing them to specify a content version. We highly recommend setting and explicity media type when your application reaches production. Both the structure and content of our API response bodies is subject to change so we can add new features while respecting the stability of applications which have already been developed.  To always use the latest SimplyRETS content version, simply use `application/json` in your application `Accept` header.  If you want to pin your clients media type to a specific version, you can use the vendor-specific SimplyRETS media type, e.g. `application/vnd.simplyrets-v0.1+json\"`  To view all valid content-types for making an `OPTIONS`, make a request to the SimplyRETS api root  `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`  The default media types used in our API responses may change in the future. If you're building an application and care about the stability of the API, be sure to request a specific media type in the Accept header as shown in the examples below.  The wordpress plugin automatically sets the `Accept` header for the compatible SimplyRETS media types.  ### Pagination There a few pieces of useful information about each request stored in the HTTP Headers:  - `X-Total-Count` shows you the total amount of listings that match   your current query. - `Link` contains pre-built pagination links for accessing the next 'page' of listings that match your query. Read more about that [here](https://simplyrets.com/blog/api-pagination.html).
 
 OpenAPI spec version: 1.0.0
 
 Generated by: https://github.com/swagger-api/swagger-codegen.git
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 =end
 
@@ -21,7 +32,7 @@ module SimplyRetsClient
     # Specific property data associated with listing.
     attr_accessor :property
 
-    # A unique identifier for this listing specific to the\nSimplyRETS API. Thie identifier is specific to the\nSimplyRETS api and has no correlation with the MLS\nnumber. Use this id when making requests to the single\nlisting endpoint (eg, `/properties/{mlsId}`).\n\nApplications should not rely on specific `mlsId`s being\npresent. Instead, apps should dynamically use the `mlsId`\nafter using other more general query parameters. Many mls\nvendors require listings which are expired, terminated or\nsold to be purged, which will render calls to specific\n`mlsId`s to return nothing (or possibly a 404).\n
+    # A unique identifier for this listing specific to the SimplyRETS API. Thie identifier is specific to the SimplyRETS api and has no correlation with the MLS number. Use this id when making requests to the single listing endpoint (eg, `/properties/{mlsId}`).  Applications should not rely on specific `mlsId`s being present. Instead, apps should dynamically use the `mlsId` after using other more general query parameters. Many mls vendors require listings which are expired, terminated or sold to be purged, which will render calls to specific `mlsId`s to return nothing (or possibly a 404).
     attr_accessor :mls_id
 
     # Public instructions for showing the property.
@@ -33,7 +44,7 @@ module SimplyRetsClient
     # Represents the length of the lease.
     attr_accessor :lease_term
 
-    # Data accuracy disclaimer. The value in the disclaimer may\nchange depending on your MLS vendors rules.\n
+    # Data accuracy disclaimer. The value in the disclaimer may change depending on your MLS vendors rules.
     attr_accessor :disclaimer
 
     # Comprehensive property address information
@@ -51,13 +62,13 @@ module SimplyRetsClient
     # Comprehensive school zone data
     attr_accessor :school
 
-    # Photos of the property. Images are served over https and are\nsuitable for production use on secure websites\n
+    # Photos of the property. Images are served over https and are suitable for production use on secure websites
     attr_accessor :photos
 
     # Price of the listing
     attr_accessor :list_price
 
-    # Data Dictionary v1.3 ListingId. The well known identifier\nfor the listing. The value is the id or number by the MLS as\na public identifier for the listing.\n\nThis identifier should not be confused with the `mlsId`, which is\nspecific to the SimplyRETS API.\n
+    # Data Dictionary v1.3 ListingId. The well known identifier for the listing. The value is the id or number by the MLS as a public identifier for the listing.  This identifier should not be confused with the `mlsId`, which is specific to the SimplyRETS API.
     attr_accessor :listing_id
 
     # MLS vendor information and data
@@ -69,66 +80,48 @@ module SimplyRetsClient
     # Associate tax data
     attr_accessor :tax
 
+    # co-listing agent information.  *NOTE*: If your RETS feed stores co-list information outside of the `Property` resource, co-list agent information will not be available.
+    attr_accessor :co_agent
+
     # Sales data
     attr_accessor :sales
 
     # Information about the status of the existing lease on the property.
     attr_accessor :lease_type
 
-    # The URL for an unbranded virtual tour of the property.\n\n**Added on 2016/05/04 - Not available for all RETS vendors**\n
+    # The URL for an unbranded virtual tour of the property.  **Added on 2016/05/04 - Not available for all RETS vendors**
     attr_accessor :virtual_tour_url
 
     # Description or remarks
     attr_accessor :remarks
 
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-
         :'private_remarks' => :'privateRemarks',
-
         :'property' => :'property',
-
         :'mls_id' => :'mlsId',
-
         :'showing_instructions' => :'showingInstructions',
-
         :'office' => :'office',
-
         :'lease_term' => :'leaseTerm',
-
         :'disclaimer' => :'disclaimer',
-
         :'address' => :'address',
-
         :'list_date' => :'listDate',
-
         :'agent' => :'agent',
-
         :'modified' => :'modified',
-
         :'school' => :'school',
-
         :'photos' => :'photos',
-
         :'list_price' => :'listPrice',
-
         :'listing_id' => :'listingId',
-
         :'mls' => :'mls',
-
         :'geo' => :'geo',
-
         :'tax' => :'tax',
-
+        :'co_agent' => :'coAgent',
         :'sales' => :'sales',
-
         :'lease_type' => :'leaseType',
-
         :'virtual_tour_url' => :'virtualTourUrl',
-
         :'remarks' => :'remarks'
-
       }
     end
 
@@ -153,116 +146,135 @@ module SimplyRetsClient
         :'mls' => :'MlsInformation',
         :'geo' => :'GeographicData',
         :'tax' => :'Tax',
+        :'co_agent' => :'Agent',
         :'sales' => :'Sales',
         :'lease_type' => :'String',
         :'virtual_tour_url' => :'String',
         :'remarks' => :'String'
-
       }
     end
 
+    # Initializes the object
+    # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-
-      if attributes[:'privateRemarks']
+      if attributes.has_key?(:'privateRemarks')
         self.private_remarks = attributes[:'privateRemarks']
       end
 
-      if attributes[:'property']
+      if attributes.has_key?(:'property')
         self.property = attributes[:'property']
       end
 
-      if attributes[:'mlsId']
+      if attributes.has_key?(:'mlsId')
         self.mls_id = attributes[:'mlsId']
       else
         self.mls_id = 329479823
       end
 
-      if attributes[:'showingInstructions']
+      if attributes.has_key?(:'showingInstructions')
         self.showing_instructions = attributes[:'showingInstructions']
       end
 
-      if attributes[:'office']
+      if attributes.has_key?(:'office')
         self.office = attributes[:'office']
       end
 
-      if attributes[:'leaseTerm']
+      if attributes.has_key?(:'leaseTerm')
         self.lease_term = attributes[:'leaseTerm']
       end
 
-      if attributes[:'disclaimer']
+      if attributes.has_key?(:'disclaimer')
         self.disclaimer = attributes[:'disclaimer']
       end
 
-      if attributes[:'address']
+      if attributes.has_key?(:'address')
         self.address = attributes[:'address']
       end
 
-      if attributes[:'listDate']
+      if attributes.has_key?(:'listDate')
         self.list_date = attributes[:'listDate']
       end
 
-      if attributes[:'agent']
+      if attributes.has_key?(:'agent')
         self.agent = attributes[:'agent']
       end
 
-      if attributes[:'modified']
+      if attributes.has_key?(:'modified')
         self.modified = attributes[:'modified']
       end
 
-      if attributes[:'school']
+      if attributes.has_key?(:'school')
         self.school = attributes[:'school']
       end
 
-      if attributes[:'photos']
+      if attributes.has_key?(:'photos')
         if (value = attributes[:'photos']).is_a?(Array)
           self.photos = value
         end
       end
 
-      if attributes[:'listPrice']
+      if attributes.has_key?(:'listPrice')
         self.list_price = attributes[:'listPrice']
       end
 
-      if attributes[:'listingId']
+      if attributes.has_key?(:'listingId')
         self.listing_id = attributes[:'listingId']
       end
 
-      if attributes[:'mls']
+      if attributes.has_key?(:'mls')
         self.mls = attributes[:'mls']
       end
 
-      if attributes[:'geo']
+      if attributes.has_key?(:'geo')
         self.geo = attributes[:'geo']
       end
 
-      if attributes[:'tax']
+      if attributes.has_key?(:'tax')
         self.tax = attributes[:'tax']
       end
 
-      if attributes[:'sales']
+      if attributes.has_key?(:'coAgent')
+        self.co_agent = attributes[:'coAgent']
+      end
+
+      if attributes.has_key?(:'sales')
         self.sales = attributes[:'sales']
       end
 
-      if attributes[:'leaseType']
+      if attributes.has_key?(:'leaseType')
         self.lease_type = attributes[:'leaseType']
       end
 
-      if attributes[:'virtualTourUrl']
+      if attributes.has_key?(:'virtualTourUrl')
         self.virtual_tour_url = attributes[:'virtualTourUrl']
       end
 
-      if attributes[:'remarks']
+      if attributes.has_key?(:'remarks')
         self.remarks = attributes[:'remarks']
       end
 
     end
 
-    # Check equality by comparing each attribute.
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -284,6 +296,7 @@ module SimplyRetsClient
           mls == o.mls &&
           geo == o.geo &&
           tax == o.tax &&
+          co_agent == o.co_agent &&
           sales == o.sales &&
           lease_type == o.lease_type &&
           virtual_tour_url == o.virtual_tour_url &&
@@ -291,35 +304,41 @@ module SimplyRetsClient
     end
 
     # @see the `==` method
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculate hash code according to all attributes.
+    # Calculates hash code according to all attributes.
+    # @return [Fixnum] Hash code
     def hash
-      [private_remarks, property, mls_id, showing_instructions, office, lease_term, disclaimer, address, list_date, agent, modified, school, photos, list_price, listing_id, mls, geo, tax, sales, lease_type, virtual_tour_url, remarks].hash
+      [private_remarks, property, mls_id, showing_instructions, office, lease_term, disclaimer, address, list_date, agent, modified, school, photos, list_price, listing_id, mls, geo, tax, co_agent, sales, lease_type, virtual_tour_url, remarks].hash
     end
 
-    # build the object from hash
+    # Builds the object from hash
+    # @param [Hash] attributes Model attributes in the form of hash
+    # @return [Object] Returns the model itself
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /^Array<(.*)>/i
+          # check to ensure the input is an array given that the the attribute
+          # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
-          else
-            #TODO show warning in debug mode
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        else
-          # data not found in attributes(hash), not an issue as the data can be optional
-        end
+        end # or else data not found in attributes(hash), not an issue as the data can be optional
       end
 
       self
     end
 
+    # Deserializes the data based on type
+    # @param string type Data type
+    # @param string value Value to be deserialized
+    # @return [Object] Deserialized data
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
@@ -353,21 +372,25 @@ module SimplyRetsClient
           end
         end
       else # model
-        _model = SimplyRetsClient.const_get(type).new
-        _model.build_from_hash(value)
+        temp_model = SimplyRetsClient.const_get(type).new
+        temp_model.build_from_hash(value)
       end
     end
 
+    # Returns the string representation of the object
+    # @return [String] String presentation of the object
     def to_s
       to_hash.to_s
     end
 
-    # to_body is an alias to to_body (backward compatibility))
+    # to_body is an alias to to_hash (backward compatibility)
+    # @return [Hash] Returns the object in the form of hash
     def to_body
       to_hash
     end
 
-    # return the object in the form of hash
+    # Returns the object in the form of hash
+    # @return [Hash] Returns the object in the form of hash
     def to_hash
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
@@ -378,8 +401,10 @@ module SimplyRetsClient
       hash
     end
 
-    # Method to output non-array value in the form of hash
+    # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
+    # @param [Object] value Any valid value
+    # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
         value.compact.map{ |v| _to_hash(v) }
@@ -395,4 +420,5 @@ module SimplyRetsClient
     end
 
   end
+
 end

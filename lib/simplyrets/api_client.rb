@@ -1,12 +1,23 @@
 =begin
 SimplyRETS API
 
-The SimplyRETS API is an exciting step towards making it easier for\ndevelopers and real estate agents to build something awesome with\nreal estate data!\n\nThe documentation below makes live requests to our API using the\ntrial data. To get set up with the API using live MLS data, you\nmust have RETS credentials from your MLS, which you can then use to\ncreate an app with SimplyRETS. For more information on that\nprocess, please see our [FAQ](https://simplyrets.com/faq), [Getting\nStarted](https://simplyrets.com/blog/getting-set-up.html) page, or\n[contact us](https://simplyrets.com/\\#home-contact).\n\nBelow you'll find the API endpoints, query parameters, response bodies,\nand other information about using the SimplyRETS API. You can run\nqueries by clicking the 'Try it Out' button at the bottom of each\nsection.\n\n### Authentication\nThe SimplyRETS API uses Basic Authentication. When you create an\napp, you'll get a set of API credentials to access your\nlistings. If you're trying out the test data, you can use\n`simplyrets:simplyrets` for connecting to the API.\n\n### Media Types\nThe SimplyRETS API uses the `Accept` header to allow clients to\ncontrol media types (content versions). We maintain backwards\ncompatibility with API clients by allowing them to specify a\ncontent version. We highly recommend setting and explicity media\ntype when your application reaches production. Both the structure\nand content of our API response bodies is subject to change so we\ncan add new features while respecting the stability of applications\nwhich have already been developed.\n\nTo always use the latest SimplyRETS content version, simply use\n`application/json` in your application `Accept` header.\n\nIf you want to pin your clients media type to a specific version,\nyou can use the vendor-specific SimplyRETS media type, e.g.\n`application/vnd.simplyrets-v0.1+json\"`\n\nTo view all valid content-types for making an `OPTIONS`, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n\nThe default media types used in our API responses may change in the\nfuture. If you're building an application and care about the\nstability of the API, be sure to request a specific media type in the\nAccept header as shown in the examples below.\n\nThe wordpress plugin automatically sets the `Accept` header for the\ncompatible SimplyRETS media types.\n\n### Pagination\nThere a few pieces of useful information about each request stored\nin the HTTP Headers:\n\n- `X-Total-Count` shows you the total amount of listings that match\n  your current query.\n- `Link` contains pre-built pagination links for accessing the next\n'page' of listings that match your query. Read more about that\n[here](https://simplyrets.com/blog/api-pagination.html).\n
+The SimplyRETS API is an exciting step towards making it easier for developers and real estate agents to build something awesome with real estate data!  The documentation below makes live requests to our API using the trial data. To get set up with the API using live MLS data, you must have RETS credentials from your MLS, which you can then use to create an app with SimplyRETS. For more information on that process, please see our [FAQ](https://simplyrets.com/faq), [Getting Started](https://simplyrets.com/blog/getting-set-up.html) page, or [contact us](https://simplyrets.com/\\#home-contact).  Below you'll find the API endpoints, query parameters, response bodies, and other information about using the SimplyRETS API. You can run queries by clicking the 'Try it Out' button at the bottom of each section.  ### Authentication The SimplyRETS API uses Basic Authentication. When you create an app, you'll get a set of API credentials to access your listings. If you're trying out the test data, you can use `simplyrets:simplyrets` for connecting to the API.  ### Media Types The SimplyRETS API uses the `Accept` header to allow clients to control media types (content versions). We maintain backwards compatibility with API clients by allowing them to specify a content version. We highly recommend setting and explicity media type when your application reaches production. Both the structure and content of our API response bodies is subject to change so we can add new features while respecting the stability of applications which have already been developed.  To always use the latest SimplyRETS content version, simply use `application/json` in your application `Accept` header.  If you want to pin your clients media type to a specific version, you can use the vendor-specific SimplyRETS media type, e.g. `application/vnd.simplyrets-v0.1+json\"`  To view all valid content-types for making an `OPTIONS`, make a request to the SimplyRETS api root  `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`  The default media types used in our API responses may change in the future. If you're building an application and care about the stability of the API, be sure to request a specific media type in the Accept header as shown in the examples below.  The wordpress plugin automatically sets the `Accept` header for the compatible SimplyRETS media types.  ### Pagination There a few pieces of useful information about each request stored in the HTTP Headers:  - `X-Total-Count` shows you the total amount of listings that match   your current query. - `Link` contains pre-built pagination links for accessing the next 'page' of listings that match your query. Read more about that [here](https://simplyrets.com/blog/api-pagination.html).
 
 OpenAPI spec version: 1.0.0
 
 Generated by: https://github.com/swagger-api/swagger-codegen.git
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 =end
 
@@ -27,6 +38,8 @@ module SimplyRetsClient
     # @return [Hash]
     attr_accessor :default_headers
 
+    # Initializes the ApiClient
+    # @option config [Configuration] Configuraiton for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
       @config = config
       @user_agent = "Swagger-Codegen/#{VERSION}/ruby"
@@ -67,6 +80,15 @@ module SimplyRetsClient
       return data, response.code, response.headers
     end
 
+    # Builds the HTTP request
+    #
+    # @param [String] http_method HTTP method/verb (e.g. POST)
+    # @param [String] path URL path (e.g. /account/new)
+    # @option opts [Hash] :header_params Header parameters
+    # @option opts [Hash] :query_params Query parameters
+    # @option opts [Hash] :form_params Query parameters
+    # @option opts [Object] :body HTTP body (JSON/XML)
+    # @return [Typhoeus::Request] A Typhoeus Request
     def build_request(http_method, path, opts = {})
       url = build_request_url(path)
       http_method = http_method.to_sym.downcase
@@ -75,9 +97,7 @@ module SimplyRetsClient
       query_params = opts[:query_params] || {}
       form_params = opts[:form_params] || {}
 
-
       update_params_for_auth! header_params, query_params, opts[:auth_names]
-
 
       req_opts = {
         :method => http_method,
@@ -108,12 +128,15 @@ module SimplyRetsClient
     #   application/json
     #   application/json; charset=UTF8
     #   APPLICATION/JSON
+    # @param [String] mime MIME
+    # @return [Boolean] True if the MIME is applicaton/json
     def json_mime?(mime)
-       !!(mime =~ /\Aapplication\/json(;.*)?\z/i)
+       !(mime =~ /\Aapplication\/json(;.*)?\z/i).nil?
     end
 
     # Deserialize the response to the given return type.
     #
+    # @param [Response] response HTTP response
     # @param [String] return_type some examples: "User", "Array[User]", "Hash[String,Integer]"
     def deserialize(response, return_type)
       body = response.body
@@ -144,6 +167,9 @@ module SimplyRetsClient
     end
 
     # Convert data to the given return type.
+    # @param [Object] data Data to be converted
+    # @param [String] return_type Return type
+    # @return [Mixed] Data in a particular type
     def convert_to_type(data, return_type)
       return nil if data.nil?
       case return_type
@@ -216,7 +242,7 @@ module SimplyRetsClient
     # @param [String] filename the filename to be sanitized
     # @return [String] the sanitized filename
     def sanitize_filename(filename)
-      filename.gsub /.*[\/\\]/, ''
+      filename.gsub(/.*[\/\\]/, '')
     end
 
     def build_request_url(path)
@@ -225,6 +251,12 @@ module SimplyRetsClient
       URI.encode(@config.base_url + path)
     end
 
+    # Builds the HTTP request body
+    #
+    # @param [Hash] header_params Header parameters
+    # @param [Hash] form_params Query parameters
+    # @param [Object] body HTTP body (JSON/XML)
+    # @return [String] HTTP body data in the form of string
     def build_request_body(header_params, form_params, body)
       # http form
       if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
@@ -248,6 +280,10 @@ module SimplyRetsClient
     end
 
     # Update hearder and query params based on authentication settings.
+    #
+    # @param [Hash] header_params Header parameters
+    # @param [Hash] form_params Query parameters
+    # @param [String] auth_names Authentication scheme name
     def update_params_for_auth!(header_params, query_params, auth_names)
       Array(auth_names).each do |auth_name|
         auth_setting = @config.auth_settings[auth_name]
@@ -260,6 +296,9 @@ module SimplyRetsClient
       end
     end
 
+    # Sets user agent in HTTP header
+    #
+    # @param [String] user_agent User agent (e.g. swagger-codegen/ruby/1.0.0)
     def user_agent=(user_agent)
       @user_agent = user_agent
       @default_headers['User-Agent'] = @user_agent
@@ -291,13 +330,13 @@ module SimplyRetsClient
     # @return [String] JSON string representation of the object
     def object_to_http_body(model)
       return model if model.nil? || model.is_a?(String)
-      _body = nil
+      local_body = nil
       if model.is_a?(Array)
-        _body = model.map{|m| object_to_hash(m) }
+        local_body = model.map{|m| object_to_hash(m) }
       else
-        _body = object_to_hash(model)
+        local_body = object_to_hash(model)
       end
-      _body.to_json
+      local_body.to_json
     end
 
     # Convert object(non-array) to hash.

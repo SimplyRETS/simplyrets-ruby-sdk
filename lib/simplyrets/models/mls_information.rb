@@ -1,12 +1,23 @@
 =begin
 SimplyRETS API
 
-The SimplyRETS API is an exciting step towards making it easier for\ndevelopers and real estate agents to build something awesome with\nreal estate data!\n\nThe documentation below makes live requests to our API using the\ntrial data. To get set up with the API using live MLS data, you\nmust have RETS credentials from your MLS, which you can then use to\ncreate an app with SimplyRETS. For more information on that\nprocess, please see our [FAQ](https://simplyrets.com/faq), [Getting\nStarted](https://simplyrets.com/blog/getting-set-up.html) page, or\n[contact us](https://simplyrets.com/\\#home-contact).\n\nBelow you'll find the API endpoints, query parameters, response bodies,\nand other information about using the SimplyRETS API. You can run\nqueries by clicking the 'Try it Out' button at the bottom of each\nsection.\n\n### Authentication\nThe SimplyRETS API uses Basic Authentication. When you create an\napp, you'll get a set of API credentials to access your\nlistings. If you're trying out the test data, you can use\n`simplyrets:simplyrets` for connecting to the API.\n\n### Media Types\nThe SimplyRETS API uses the `Accept` header to allow clients to\ncontrol media types (content versions). We maintain backwards\ncompatibility with API clients by allowing them to specify a\ncontent version. We highly recommend setting and explicity media\ntype when your application reaches production. Both the structure\nand content of our API response bodies is subject to change so we\ncan add new features while respecting the stability of applications\nwhich have already been developed.\n\nTo always use the latest SimplyRETS content version, simply use\n`application/json` in your application `Accept` header.\n\nIf you want to pin your clients media type to a specific version,\nyou can use the vendor-specific SimplyRETS media type, e.g.\n`application/vnd.simplyrets-v0.1+json\"`\n\nTo view all valid content-types for making an `OPTIONS`, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n\nThe default media types used in our API responses may change in the\nfuture. If you're building an application and care about the\nstability of the API, be sure to request a specific media type in the\nAccept header as shown in the examples below.\n\nThe wordpress plugin automatically sets the `Accept` header for the\ncompatible SimplyRETS media types.\n\n### Pagination\nThere a few pieces of useful information about each request stored\nin the HTTP Headers:\n\n- `X-Total-Count` shows you the total amount of listings that match\n  your current query.\n- `Link` contains pre-built pagination links for accessing the next\n'page' of listings that match your query. Read more about that\n[here](https://simplyrets.com/blog/api-pagination.html).\n
+The SimplyRETS API is an exciting step towards making it easier for developers and real estate agents to build something awesome with real estate data!  The documentation below makes live requests to our API using the trial data. To get set up with the API using live MLS data, you must have RETS credentials from your MLS, which you can then use to create an app with SimplyRETS. For more information on that process, please see our [FAQ](https://simplyrets.com/faq), [Getting Started](https://simplyrets.com/blog/getting-set-up.html) page, or [contact us](https://simplyrets.com/\\#home-contact).  Below you'll find the API endpoints, query parameters, response bodies, and other information about using the SimplyRETS API. You can run queries by clicking the 'Try it Out' button at the bottom of each section.  ### Authentication The SimplyRETS API uses Basic Authentication. When you create an app, you'll get a set of API credentials to access your listings. If you're trying out the test data, you can use `simplyrets:simplyrets` for connecting to the API.  ### Media Types The SimplyRETS API uses the `Accept` header to allow clients to control media types (content versions). We maintain backwards compatibility with API clients by allowing them to specify a content version. We highly recommend setting and explicity media type when your application reaches production. Both the structure and content of our API response bodies is subject to change so we can add new features while respecting the stability of applications which have already been developed.  To always use the latest SimplyRETS content version, simply use `application/json` in your application `Accept` header.  If you want to pin your clients media type to a specific version, you can use the vendor-specific SimplyRETS media type, e.g. `application/vnd.simplyrets-v0.1+json\"`  To view all valid content-types for making an `OPTIONS`, make a request to the SimplyRETS api root  `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`  The default media types used in our API responses may change in the future. If you're building an application and care about the stability of the API, be sure to request a specific media type in the Accept header as shown in the examples below.  The wordpress plugin automatically sets the `Accept` header for the compatible SimplyRETS media types.  ### Pagination There a few pieces of useful information about each request stored in the HTTP Headers:  - `X-Total-Count` shows you the total amount of listings that match   your current query. - `Link` contains pre-built pagination links for accessing the next 'page' of listings that match your query. Read more about that [here](https://simplyrets.com/blog/api-pagination.html).
 
 OpenAPI spec version: 1.0.0
 
 Generated by: https://github.com/swagger-api/swagger-codegen.git
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 =end
 
@@ -15,7 +26,7 @@ require 'date'
 module SimplyRetsClient
   # RETS MLS Vendor Data
   class MlsInformation
-    # MLS Status Code. Compliant with data dictionary v1.3 ListingStatus\nListing statuses depend on your MLS's availability. Below is\na brief description of each status with possible synonyms which\nmay map to your MLS-specific statuses\n- Active: Active Listing which is still on the market\n- ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent\n- Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract\n- Hold: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- Withdrawn: The listing has been withdrawn from the market, but a contract\n  still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market\n- Closed: The purchase agreement has been fulfilled or the lease\n  agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale\n- Expired: The listing contract has expired\n- Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap\n- Incomplete: The listing has not yet be completely entered and is not yet\n  published in the MLS. Synonyms: Draft, Partially Complted\n- ComingSoon\n
+    # MLS Status Code. Compliant with data dictionary v1.3 ListingStatus Listing statuses depend on your MLS's availability. Below is a brief description of each status with possible synonyms which may map to your MLS-specific statuses - Active: Active Listing which is still on the market - ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent - Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract - Hold: The listing has been withdrawn from the market, but a contract   still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market - Withdrawn: The listing has been withdrawn from the market, but a contract   still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market - Closed: The purchase agreement has been fulfilled or the lease   agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale - Expired: The listing contract has expired - Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap - Incomplete: The listing has not yet be completely entered and is not yet   published in the MLS. Synonyms: Draft, Partially Complted - ComingSoon
     attr_accessor :status
 
     # MLS Area. Generally a subdivision or community name.
@@ -24,21 +35,38 @@ module SimplyRetsClient
     # Amount of days the property has been Active
     attr_accessor :days_on_market
 
-    # Alias for the listing office or brokerage
-    attr_accessor :serving_name
+    # Alias for the listing office or brokerage  This field corresponds to the data-dictionary `OriginatingSystemName` field  The name of the originating record provider.  Most commonly the name of the MLS. The place where the listing is originally input by the member.  The legal name of the company.  To be used for display.  If you're RETS provider aggregates feeds from multiple MLS's, this will be the name of the corresponding MLS.
+    attr_accessor :originating_system_name
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-
         :'status' => :'status',
-
         :'area' => :'area',
-
         :'days_on_market' => :'daysOnMarket',
-
-        :'serving_name' => :'servingName'
-
+        :'originating_system_name' => :'originatingSystemName'
       }
     end
 
@@ -48,85 +76,108 @@ module SimplyRetsClient
         :'status' => :'String',
         :'area' => :'String',
         :'days_on_market' => :'Integer',
-        :'serving_name' => :'String'
-
+        :'originating_system_name' => :'String'
       }
     end
 
+    # Initializes the object
+    # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-
-      if attributes[:'status']
+      if attributes.has_key?(:'status')
         self.status = attributes[:'status']
       end
 
-      if attributes[:'area']
+      if attributes.has_key?(:'area')
         self.area = attributes[:'area']
       end
 
-      if attributes[:'daysOnMarket']
+      if attributes.has_key?(:'daysOnMarket')
         self.days_on_market = attributes[:'daysOnMarket']
       end
 
-      if attributes[:'servingName']
-        self.serving_name = attributes[:'servingName']
+      if attributes.has_key?(:'originatingSystemName')
+        self.originating_system_name = attributes[:'originatingSystemName']
       end
 
     end
 
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      status_validator = EnumAttributeValidator.new('String', ["Active", "ActiveUnderContract (Backup-Offer)", "Pending", "Hold", "Withdrawn", "Closed", "Expired", "Delete", "Incomplete", "ComingSoon"])
+      return false unless status_validator.valid?(@status)
+      return true
+    end
+
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
     def status=(status)
-      allowed_values = ["Active", "ActiveUnderContract (Backup-Offer)", "Pending", "Hold", "Withdrawn", "Closed", "Expired", "Delete", "Incomplete", "ComingSoon"]
-      if status && !allowed_values.include?(status)
-        fail "invalid value for 'status', must be one of #{allowed_values}"
+      validator = EnumAttributeValidator.new('String', ["Active", "ActiveUnderContract (Backup-Offer)", "Pending", "Hold", "Withdrawn", "Closed", "Expired", "Delete", "Incomplete", "ComingSoon"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for 'status', must be one of #{validator.allowable_values}."
       end
       @status = status
     end
 
-    # Check equality by comparing each attribute.
+    # Checks equality by comparing each attribute.
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           status == o.status &&
           area == o.area &&
           days_on_market == o.days_on_market &&
-          serving_name == o.serving_name
+          originating_system_name == o.originating_system_name
     end
 
     # @see the `==` method
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculate hash code according to all attributes.
+    # Calculates hash code according to all attributes.
+    # @return [Fixnum] Hash code
     def hash
-      [status, area, days_on_market, serving_name].hash
+      [status, area, days_on_market, originating_system_name].hash
     end
 
-    # build the object from hash
+    # Builds the object from hash
+    # @param [Hash] attributes Model attributes in the form of hash
+    # @return [Object] Returns the model itself
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /^Array<(.*)>/i
+          # check to ensure the input is an array given that the the attribute
+          # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
-          else
-            #TODO show warning in debug mode
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        else
-          # data not found in attributes(hash), not an issue as the data can be optional
-        end
+        end # or else data not found in attributes(hash), not an issue as the data can be optional
       end
 
       self
     end
 
+    # Deserializes the data based on type
+    # @param string type Data type
+    # @param string value Value to be deserialized
+    # @return [Object] Deserialized data
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
@@ -160,21 +211,25 @@ module SimplyRetsClient
           end
         end
       else # model
-        _model = SimplyRetsClient.const_get(type).new
-        _model.build_from_hash(value)
+        temp_model = SimplyRetsClient.const_get(type).new
+        temp_model.build_from_hash(value)
       end
     end
 
+    # Returns the string representation of the object
+    # @return [String] String presentation of the object
     def to_s
       to_hash.to_s
     end
 
-    # to_body is an alias to to_body (backward compatibility))
+    # to_body is an alias to to_hash (backward compatibility)
+    # @return [Hash] Returns the object in the form of hash
     def to_body
       to_hash
     end
 
-    # return the object in the form of hash
+    # Returns the object in the form of hash
+    # @return [Hash] Returns the object in the form of hash
     def to_hash
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
@@ -185,8 +240,10 @@ module SimplyRetsClient
       hash
     end
 
-    # Method to output non-array value in the form of hash
+    # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
+    # @param [Object] value Any valid value
+    # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
         value.compact.map{ |v| _to_hash(v) }
@@ -202,4 +259,5 @@ module SimplyRetsClient
     end
 
   end
+
 end

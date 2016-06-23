@@ -172,8 +172,6 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'mlsId')
         self.mls_id = attributes[:'mlsId']
-      else
-        self.mls_id = 329479823
       end
 
       if attributes.has_key?(:'showingInstructions')

@@ -241,8 +241,6 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'roof')
         self.roof = attributes[:'roof']
-      else
-        self.roof = "Composition"
       end
 
       if attributes.has_key?(:'cooling')
@@ -251,14 +249,10 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'style')
         self.style = attributes[:'style']
-      else
-        self.style = "Ranch, Traditional"
       end
 
       if attributes.has_key?(:'area')
         self.area = attributes[:'area']
-      else
-        self.area = 5984
       end
 
       if attributes.has_key?(:'bathsFull')
@@ -271,14 +265,10 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'stories')
         self.stories = attributes[:'stories']
-      else
-        self.stories = 2.0
       end
 
       if attributes.has_key?(:'fireplaces')
         self.fireplaces = attributes[:'fireplaces']
-      else
-        self.fireplaces = 1
       end
 
       if attributes.has_key?(:'flooring')
@@ -287,8 +277,6 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'heating')
         self.heating = attributes[:'heating']
-      else
-        self.heating = "Central System, Forced Air, Gas"
       end
 
       if attributes.has_key?(:'foundation')
@@ -313,8 +301,6 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'lotSizeAcres')
         self.lot_size_acres = attributes[:'lotSizeAcres']
-      else
-        self.lot_size_acres = 10.0
       end
 
       if attributes.has_key?(:'subType')
@@ -323,26 +309,18 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'bedrooms')
         self.bedrooms = attributes[:'bedrooms']
-      else
-        self.bedrooms = 5
       end
 
       if attributes.has_key?(:'interiorFeatures')
         self.interior_features = attributes[:'interiorFeatures']
-      else
-        self.interior_features = "2-Story Foyer,9 ft + Ceil Main,Cathedral Ceiling,Double Vnty Other,High Speed Internet Available,Entrance Foyer,Hardwood Floors,Trey Ceilings,Walk-In Closet(s),Wall/Wall Carpet "
       end
 
       if attributes.has_key?(:'lotSize')
         self.lot_size = attributes[:'lotSize']
-      else
-        self.lot_size = "3/4 Up To 1 Acre"
       end
 
       if attributes.has_key?(:'areaSource')
         self.area_source = attributes[:'areaSource']
-      else
-        self.area_source = "Tax Record"
       end
 
       if attributes.has_key?(:'maintenanceExpense')
@@ -355,8 +333,6 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'exteriorFeatures')
         self.exterior_features = attributes[:'exteriorFeatures']
-      else
-        self.exterior_features = "1-2 Step Entry,Barn(s),Fenced Yard,Front Porch,Garden Area,Guest House,Out-Buildings,Patio,Prof Landscaping "
       end
 
       if attributes.has_key?(:'water')
@@ -369,14 +345,10 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'lotSizeArea')
         self.lot_size_area = attributes[:'lotSizeArea']
-      else
-        self.lot_size_area = 5000.0
       end
 
       if attributes.has_key?(:'subdivision')
         self.subdivision = attributes[:'subdivision']
-      else
-        self.subdivision = "River Oaks"
       end
 
       if attributes.has_key?(:'construction')
@@ -389,14 +361,10 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'lotSizeAreaUnits')
         self.lot_size_area_units = attributes[:'lotSizeAreaUnits']
-      else
-        self.lot_size_area_units = "Sq Ft"
       end
 
       if attributes.has_key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = "RES"
       end
 
       if attributes.has_key?(:'garageSpaces')
@@ -413,8 +381,6 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'yearBuilt')
         self.year_built = attributes[:'yearBuilt']
-      else
-        self.year_built = 2007
       end
 
     end

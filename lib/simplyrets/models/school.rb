@@ -69,26 +69,18 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'middleSchool')
         self.middle_school = attributes[:'middleSchool']
-      else
-        self.middle_school = "Middle School"
       end
 
       if attributes.has_key?(:'highSchool')
         self.high_school = attributes[:'highSchool']
-      else
-        self.high_school = "High School"
       end
 
       if attributes.has_key?(:'elementarySchool')
         self.elementary_school = attributes[:'elementarySchool']
-      else
-        self.elementary_school = "Elementary School"
       end
 
       if attributes.has_key?(:'district')
         self.district = attributes[:'district']
-      else
-        self.district = "School District"
       end
 
     end

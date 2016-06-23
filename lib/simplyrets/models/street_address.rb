@@ -94,56 +94,38 @@ module SimplyRetsClient
 
       if attributes.has_key?(:'crossStreet')
         self.cross_street = attributes[:'crossStreet']
-      else
-        self.cross_street = "456 Cross Rd"
       end
 
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
-      else
-        self.state = "Texas"
       end
 
       if attributes.has_key?(:'country')
         self.country = attributes[:'country']
-      else
-        self.country = "United States"
       end
 
       if attributes.has_key?(:'postalCode')
         self.postal_code = attributes[:'postalCode']
-      else
-        self.postal_code = "77324"
       end
 
       if attributes.has_key?(:'streetName')
         self.street_name = attributes[:'streetName']
-      else
-        self.street_name = "SimplyRETS Drive"
       end
 
       if attributes.has_key?(:'streetNumberText')
         self.street_number_text = attributes[:'streetNumberText']
-      else
-        self.street_number_text = "1234"
       end
 
       if attributes.has_key?(:'city')
         self.city = attributes[:'city']
-      else
-        self.city = "Houston"
       end
 
       if attributes.has_key?(:'streetNumber')
         self.street_number = attributes[:'streetNumber']
-      else
-        self.street_number = 1234
       end
 
       if attributes.has_key?(:'full')
         self.full = attributes[:'full']
-      else
-        self.full = "1234 SimplyRETS Drive"
       end
 
     end
